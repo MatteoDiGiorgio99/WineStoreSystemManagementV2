@@ -15,6 +15,7 @@ import com.rossettimonicadigiorgio.winestoremanagementv2.classes.User;
 import javafx.application.Application;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.*;
 
 import javafx.geometry.Insets;
@@ -236,18 +237,29 @@ public class MainClient extends Application {
 		BorderPane border = new BorderPane();
 		
 		HBox hboxResearch = HboxResearch(SigninStage);
-		VBox vboxData = VBoxData();
-		GridPane gridData = GridData();
+		VBox vboxData = VBoxDataEmployee();
+		GridPane gridData = GridDataEmployee();
 		border.setTop(hboxResearch);
 		border.setLeft(vboxData);
-		border.setCenter(gridData);
-		addStackPaneResearch(hboxResearch);
+		border.setRight(gridData);
 		
 		Scene sceneSignIn = new Scene(border,1000,600);
 		
 		SigninStage.setTitle("Welcome in your account");
 		SigninStage.setScene(sceneSignIn);
 		SigninStage.show();
+	}
+
+	private GridPane GridDataEmployee() {
+		GridPane grid = new GridPane();
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(0,10,0,10));
+		
+		PieChart chartWine = new PieChart(FXCollections.observableArrayList(new PieChart.Data("UX",50),new PieChart.Data("UY",20),new PieChart.Data("UZ",30)));
+		chartWine.setTitle("WINES AVAILABLE");
+		grid.getChildren().add(chartWine);
+		return grid;
 	}
 
 	private void SignInAdmin() {
@@ -257,10 +269,10 @@ public class MainClient extends Application {
 		
 		HBox hboxResearch = HboxResearch(SigninStage);
 		VBox vboxData = VBoxData();
-		GridPane gridData = GridData();
+		
 		border.setTop(hboxResearch);
 		border.setLeft(vboxData);
-		border.setCenter(gridData);
+	
 		addStackPaneResearch(hboxResearch);
 		
 		Scene sceneSignIn = new Scene(border,1000,600);
@@ -298,9 +310,13 @@ public class MainClient extends Application {
 		grid.setVgap(10);
 		grid.setPadding(new Insets(0,10,0,10));
 		
-		PieChart chartWine = new PieChart(FXCollections.observableArrayList(new PieChart.Data("UX",50),new PieChart.Data("UY",20),new PieChart.Data("UZ",30)));
-		chartWine.setTitle("WINES AVAILABLE");
-		grid.getChildren().add(chartWine);
+		ObservableList wine = FXCollections.observableArrayList();
+		ListView lsvWine = new ListView(wine);
+		lsvWine.setPrefSize(200, 250);
+		wine.addAll("D","DP","DPC","DPCM","D","DP","DPC","DPCM","D","DP","DPC","DPCM");
+		lsvWine.setItems(wine);
+		
+		grid.getChildren().add(lsvWine);
 		return grid;
 	}
 
@@ -334,15 +350,58 @@ public class MainClient extends Application {
 		
 		return vbox ;
 	}
+	
+	private VBox VBoxDataEmployee() {
+		VBox vbox = new VBox();
+		vbox.setPadding(new Insets(10));
+		vbox.setSpacing(8);
+		
+		Text title = new Text("Menu'");
+		title.setFont(Font.font("Arial",FontWeight.BOLD,15));
+		vbox.getChildren().add(title);
+		
+		Hyperlink[] options = new Hyperlink[] {new Hyperlink("Ship"),new Hyperlink("Restock Bottle")};
+		for(int i = 0; i<2;i++)
+		{
+			vbox.getChildren().add(options[i]);
+		}
+		options[0].setOnAction(event -> {Ship();});
+		options[1].setOnAction(event -> {RestockBottle();});
+		
+		return vbox ;
+	}
+
+
+	private void RestockBottle() {
+		
+		Stage stageRestock = new Stage();
+		BorderPane borderRestock = new BorderPane();
+		borderRestock.setStyle("-fx-background-color:  #ABCDEF;");
+		Scene sceneRestock = new Scene (borderRestock,500,500);
+		stageRestock.setScene(sceneRestock);
+		stageRestock.show();
+		
+	}
+
+	private void Ship() {
+		
+		Stage stageShip = new Stage();
+		BorderPane borderShip = new BorderPane();
+		borderShip.setStyle("-fx-background-color:  #ABCDEF;");
+		Scene sceneShip = new Scene (borderShip,500,500);
+		stageShip.setScene(sceneShip);
+		stageShip.show();
+		
+	}
 
 	private void MyNot() {
 		
-		Stage stageMyAddDel = new Stage();
-		BorderPane borderMyAddDel = new BorderPane();
-		borderMyAddDel.setStyle("-fx-background-color:  #ABCDEF;");
-		Scene sceneMyAddDel = new Scene (borderMyAddDel,500,500);
-		stageMyAddDel.setScene(sceneMyAddDel);
-		stageMyAddDel.show();
+		Stage stageMyNot = new Stage();
+		BorderPane borderMyNot = new BorderPane();
+		borderMyNot.setStyle("-fx-background-color:  #ABCDEF;");
+		Scene sceneMyNot = new Scene (borderMyNot,500,500);
+		stageMyNot.setScene(sceneMyNot);
+		stageMyNot.show();
 	}
 
 	private void MyAccount() {
@@ -384,8 +443,7 @@ public class MainClient extends Application {
 		
 		return hbox;
 	}
-
-
+	
 	public void Register()
 	{
 		Stage registerStage = new Stage();
