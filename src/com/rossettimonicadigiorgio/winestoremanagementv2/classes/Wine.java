@@ -66,6 +66,11 @@ public class Wine implements Serializable {
 	public Wine clone() {
 		return new Wine(this.IDWine, this.Name, this.Producer, this.Year, this.Price, this.Notes, this.BottlesNumber, this.Vines);
 	}
+	
+    @Override
+    public String toString() { 
+        return String.format(this.Name + ": $" + this.Price + " | " + this.BottlesNumber + " bottles in the cart"); 
+    } 
 
 	/**
 	 * Fetch the wine's ID
@@ -132,14 +137,14 @@ public class Wine implements Serializable {
 	 * @param numberofbottles the new bottles
 	 * @return if the operation has succeeded 
 	 */
-	protected boolean Restock(int numberofbottles) { this.BottlesNumber += numberofbottles; return true; }
+	public boolean Restock(int numberofbottles) { this.BottlesNumber += numberofbottles; return true; }
 	
 	/**
 	 * Check if two wines are equals
 	 * @param wine to be compared
 	 * @return if they are equal
 	 */
-	protected boolean EqualTo(Wine wine) {
+	public boolean EqualTo(Wine wine) {
 		return wine.Name == this.Name && wine.Producer == this.Producer && wine.Year == this.Year;  
 	}
 	
@@ -150,7 +155,7 @@ public class Wine implements Serializable {
 	 * @param year of production
 	 * @return if they are equal
 	 */
-	protected boolean EqualTo(String name, String producer, int year) {
+	public boolean EqualTo(String name, String producer, int year) {
 		return name == this.Name && producer == this.Producer && year == this.Year;  
 	}
 }

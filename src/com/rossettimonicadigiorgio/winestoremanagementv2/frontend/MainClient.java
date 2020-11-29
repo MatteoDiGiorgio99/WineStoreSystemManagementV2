@@ -13,6 +13,7 @@ import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Response;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.User;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Wine;
 
+
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -41,6 +42,7 @@ import javafx.util.Callback;
 public class MainClient extends Application {
 	
 	Person user;
+	ArrayList<Wine> listWineCart = new ArrayList<Wine>();
 
 	@Override
 	public void start(final Stage primaryStage) throws FileNotFoundException {	
@@ -222,11 +224,19 @@ public class MainClient extends Application {
 		
 		HBox hboxResearch = HboxResearch(SigninStage);
 		VBox vboxData = VBoxData();
-		GridPane gridData = GridData();
+		FlowPane flowData = ShoppingCart();
+		
+		GridPane gridData = GridData("", flowData);
+		gridData.setPadding(new Insets(30,0,100,100));
+		
 		border.setTop(hboxResearch);
 		border.setLeft(vboxData);
 		border.setCenter(gridData);
-		addStackPaneResearch(hboxResearch);
+		border.setRight(flowData);
+		
+		addStackPaneResearch(hboxResearch, gridData, flowData);
+		
+	
 		
 		Scene sceneSignIn = new Scene(border,1000,600);
 		
@@ -277,8 +287,8 @@ public class MainClient extends Application {
 		
 		border.setTop(hboxResearch);
 		border.setLeft(vboxData);
-	
-		addStackPaneResearch(hboxResearch);
+	    
+		addStackPaneResearch(hboxResearch, null, null);
 		
 		Scene sceneSignIn = new Scene(border,1000,600);
 		
@@ -309,11 +319,10 @@ public class MainClient extends Application {
 	}
 
 	
-	private GridPane GridData() {
+	private GridPane GridData(String filter, FlowPane cartContainer) {
 		GridPane grid = new GridPane();
 		grid.setHgap(20);
 		grid.setVgap(20);
-		grid.setPadding(new Insets(30,100,100,100));
 		
 		TableView<Wine> tbvWine = new TableView<Wine>();
 		TableColumn<Wine, String> nameCol = new TableColumn<Wine, String>("Name");	
@@ -331,13 +340,43 @@ public class MainClient extends Application {
 		TableColumn<Wine, Integer> numberCol = new TableColumn<Wine, Integer>("Bottles Number");
 		numberCol.setCellValueFactory(new PropertyValueFactory<>("BottlesNumber"));
 		
+		tbvWine.setRowFactory(tv -> {
+			TableRow<Wine> row = new TableRow<>();
+			
+			row.setOnMouseClicked(event -> {
+				if(event.getClickCount() == 2 && (!row.isEmpty())) {
+					boolean isInList = false;
+					for (Wine wine : listWineCart) {
+						if(wine.EqualTo(row.getItem())) {
+							isInList = true;
+							wine.setBottlesNumber(wine.getBottlesNumber() + 1);
+							break;
+						}
+						
+					}
+					
+					if(!isInList) {
+						Wine toAdd = row.getItem();
+						toAdd.setBottlesNumber(1);
+						listWineCart.add(toAdd);
+					}
+					
+					cartContainer.getChildren().clear();
+					cartContainer.getChildren().add(ShoppingCart());
+				}
+			});
+			
+			return row;
+		});		
+		
 		ArrayList<Object> params = new ArrayList<Object>();
-		params.add("");
+		params.add(filter);
 		
 		ArrayList<Wine> result = (ArrayList<Wine>) new Client().run(new Request("filterWines", params)).getValue();
 		
 		tbvWine.getColumns().addAll(nameCol,producerCol,yearCol,priceCol,numberCol);
-
+		
+		tbvWine.getItems().clear();
 	    tbvWine.getItems().addAll(result);
 	    tbvWine.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);	
 		
@@ -345,13 +384,36 @@ public class MainClient extends Application {
 		return grid;
 	}
 
-	private void addStackPaneResearch(HBox hboxResearch) {
+	private FlowPane ShoppingCart() {			
+		FlowPane flowWine = new FlowPane();
+		flowWine.setPadding(new Insets(15,8,0,25));
+		
+		if(this.listWineCart.size() <= 0)
+			return flowWine;
+		
+		ObservableList<Wine> oblWineCart = FXCollections.observableArrayList();
+		oblWineCart.addAll(this.listWineCart);
+		ListView<Wine> lsvWineCart = new ListView<Wine>(oblWineCart);
+	
+		flowWine.getChildren().add(lsvWineCart);
+		
+		return flowWine;
+	}
+
+	private void addStackPaneResearch(HBox hboxResearch, GridPane grid, FlowPane cartFlow) {
 		StackPane stack = new StackPane();
 		TextField txtResearch = new TextField();
 		Button btnResearch = new Button("Research");
 		txtResearch.setPrefSize(350, 20);
 		stack.getChildren().addAll(txtResearch,btnResearch);
 		stack.setAlignment(Pos.TOP_RIGHT);
+		
+		btnResearch.setOnAction(event -> {
+			grid.getChildren().clear();
+			grid.getChildren().add(GridData(txtResearch.getText(), cartFlow));
+			
+		});
+		
 		hboxResearch.getChildren().add(stack);
 	}
 
