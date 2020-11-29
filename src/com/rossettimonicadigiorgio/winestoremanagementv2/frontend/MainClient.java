@@ -11,9 +11,11 @@ import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Person;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Request;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Response;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.User;
+import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Wine;
 
 import javafx.application.Application;
-
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.*;
@@ -23,6 +25,8 @@ import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -31,6 +35,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 
 public class MainClient extends Application {
@@ -306,17 +311,37 @@ public class MainClient extends Application {
 	
 	private GridPane GridData() {
 		GridPane grid = new GridPane();
-		grid.setHgap(10);
-		grid.setVgap(10);
-		grid.setPadding(new Insets(0,10,0,10));
+		grid.setHgap(20);
+		grid.setVgap(20);
+		grid.setPadding(new Insets(30,100,100,100));
 		
-		ObservableList wine = FXCollections.observableArrayList();
-		ListView lsvWine = new ListView(wine);
-		lsvWine.setPrefSize(200, 250);
-		wine.addAll("D","DP","DPC","DPCM","D","DP","DPC","DPCM","D","DP","DPC","DPCM");
-		lsvWine.setItems(wine);
+		TableView<Wine> tbvWine = new TableView<Wine>();
+		TableColumn<Wine, String> nameCol = new TableColumn<Wine, String>("Name");	
+		nameCol.setCellValueFactory(new PropertyValueFactory<>("Name"));
 		
-		grid.getChildren().add(lsvWine);
+		TableColumn<Wine, String> producerCol = new TableColumn<Wine, String>("Producer");
+		producerCol.setCellValueFactory(new PropertyValueFactory<>("Producer"));
+		
+		TableColumn<Wine, Integer> yearCol = new TableColumn<Wine, Integer>("Year");
+		yearCol.setCellValueFactory(new PropertyValueFactory<>("Year"));
+		
+		TableColumn<Wine, Double> priceCol = new TableColumn<Wine, Double>("Price");
+		priceCol.setCellValueFactory(new PropertyValueFactory<>("Price"));
+		
+		TableColumn<Wine, Integer> numberCol = new TableColumn<Wine, Integer>("Bottles Number");
+		numberCol.setCellValueFactory(new PropertyValueFactory<>("BottlesNumber"));
+		
+		ArrayList<Object> params = new ArrayList<Object>();
+		params.add("");
+		
+		ArrayList<Wine> result = (ArrayList<Wine>) new Client().run(new Request("filterWines", params)).getValue();
+		
+		tbvWine.getColumns().addAll(nameCol,producerCol,yearCol,priceCol,numberCol);
+
+	    tbvWine.getItems().addAll(result);
+	    tbvWine.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);	
+		
+		grid.getChildren().add(tbvWine);
 		return grid;
 	}
 

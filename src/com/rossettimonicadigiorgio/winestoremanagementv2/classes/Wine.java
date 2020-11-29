@@ -98,6 +98,12 @@ public class Wine implements Serializable {
 	public String getNotes() { return this.Notes; }
 	
 	/**
+	 * Fetch price of the wine 
+	 * @return wine's price
+	 */
+	public double getPrice() { return this.Price; }
+	
+	/**
 	 * Fetch number of bottle available
 	 * @return number of bottle available
 	 */
