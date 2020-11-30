@@ -2,46 +2,31 @@ package com.rossettimonicadigiorgio.winestoremanagementv2.frontend;
 
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Administrator;
-import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Employee;
+import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Notification;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Person;
-import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Request;
-import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Response;
-import com.rossettimonicadigiorgio.winestoremanagementv2.classes.User;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Wine;
 
 
 import javafx.application.Application;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.*;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.*;
-import javafx.scene.chart.*;
 import javafx.scene.control.*;
-import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 
 public class MainClient extends Application {
 	static Person user;
 	static ArrayList<Wine> listWineCart = new ArrayList<Wine>();
+	
+	static Stage SigninStage = new Stage();
 
 	@Override
 	public void start(final Stage primaryStage) throws FileNotFoundException {	
@@ -126,6 +111,10 @@ public class MainClient extends Application {
 		BorderPane borderMyNot = new BorderPane();
 		borderMyNot.setStyle("-fx-background-color:  #ABCDEF;");
 		Scene sceneMyNot = new Scene (borderMyNot,500,500);
+		
+		ListView<Notification> listNot = new ListView<Notification>();
+		borderMyNot.setCenter(listNot);
+		
 		stageMyNot.setScene(sceneMyNot);
 		stageMyNot.show();
 	}
@@ -133,23 +122,63 @@ public class MainClient extends Application {
 	public static void MyAccount() {
 		
 		Stage stageMyAccount = new Stage();
+		stageMyAccount.setTitle("Summary Account");
 		BorderPane borderMyAccount = new BorderPane();
 		borderMyAccount.setStyle("-fx-background-color:  #ABCDEF;");
 		Scene sceneMyAccount = new Scene (borderMyAccount,500,500);
+		GridPane grid = new GridPane();
+		grid.setAlignment(Pos.CENTER);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(25,25,25,25));
+		 
+        Label lblUser = new Label("Name: ");
+        grid.add(lblUser, 0, 1);
+        TextField txtUser = new TextField();
+        txtUser.setEditable(false);
+        txtUser.setText(user.getName());;
+        grid.add(txtUser,1,1);
+        
+        Label lblSurname = new Label("Surname: ");
+        grid.add(lblSurname, 0, 2);
+        TextField txtSurname = new TextField();
+        txtSurname.setEditable(false);
+        txtSurname.setText(user.getSurname());
+        grid.add(txtSurname,1,2);
+        
+        Label lblEmail = new Label("Email: ");
+        grid.add(lblEmail, 0, 3);
+        TextField txtEmail = new TextField();
+        txtEmail.setEditable(false);
+        txtEmail.setText(user.getEmail());
+        grid.add(txtEmail,1,3);
+        
+        Label lblPassword = new Label("Password: ");
+        grid.add(lblPassword, 0,4);
+        TextField txtPassword = new TextField();
+        txtPassword.setEditable(false);
+        txtPassword.setText(user.getPassword());
+        grid.add(txtPassword,1,4);
+        
+        borderMyAccount.setCenter(grid);
+		
 		stageMyAccount.setScene(sceneMyAccount);
 		stageMyAccount.show();
 		
 	}
 
-	public static void MyOrder() {
+	public static void LastOrder() {
+		if(UserPage.lastOrder == null)
+			return;
 		
 		Stage stageMyOrder = new Stage();
 		BorderPane borderMyOrder = new BorderPane();
 		borderMyOrder.setStyle("-fx-background-color:  #ABCDEF;");
 		Scene sceneMyOrder = new Scene (borderMyOrder,500,500);
 		
-		ObservableList<Wine> oblWineCart = FXCollections.observableArrayList();;
-		oblWineCart.addAll(UserPage.listRecorderOrder);
+		ObservableList<Wine> oblWineCart = FXCollections.observableArrayList();
+		
+		oblWineCart.addAll(UserPage.lastOrder.getWines());
+		
 		ListView<Wine>lsvWineCartOrder = new ListView<Wine>(oblWineCart);
 		
 		

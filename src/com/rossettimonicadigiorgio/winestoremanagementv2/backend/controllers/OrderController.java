@@ -1,5 +1,6 @@
 package com.rossettimonicadigiorgio.winestoremanagementv2.backend.controllers;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -57,6 +58,61 @@ public class OrderController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+	
+	public static Order insertOrder(Order orderToInsert) {
+		try {
+			String insertOrderQuery = "INSERT INTO orders (Status, User) VALUES (?, ?)";
+			PreparedStatement insertOrderStatement = MySQLConnection.establishConnection().prepareStatement(insertOrderQuery, Statement.RETURN_GENERATED_KEYS);
+			
+			insertOrderStatement.setInt(1, orderToInsert.getStatus().GetID());
+			insertOrderStatement.setInt(2, orderToInsert.getUser().getIDPerson());
+			
+			insertOrderStatement.execute();
+			
+			int idOrder = 0;
+			
+	        try (ResultSet generatedKeys = insertOrderStatement.getGeneratedKeys()) {
+	            if (generatedKeys.next()) {
+	            	idOrder = generatedKeys.getInt(1);
+	            }
+	        }
+			
+			ArrayList<Wine> orderedAvailableWines = new ArrayList<Wine>(); 
+			
+			for (Wine wine : orderToInsert.getWines()) {
+				Wine updatedWine = WineController.getWineByID(wine.getIDWine());
+				
+				if(updatedWine.ProcessOrder(wine.getBottlesNumber())) {
+					orderedAvailableWines.add(wine);
+					
+					addOrderWines(idOrder, wine);
+					WineController.updateWine(updatedWine);
+				}	
+			}
+			
+			Order order = new Order(idOrder, orderToInsert.getStatus(), orderToInsert.getUser(), orderedAvailableWines);
+			
+			return order;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	private static void addOrderWines(int idOrder, Wine wine) {
+		try {
+			String insertOrderQuery = "INSERT INTO orderwines (Wine, OrderNumber, BottlesNumber) VALUES (?, ?, ?)";
+			PreparedStatement insertOrderStatement = MySQLConnection.establishConnection().prepareStatement(insertOrderQuery, Statement.RETURN_GENERATED_KEYS);
+			
+			insertOrderStatement.setInt(1, wine.getIDWine());
+			insertOrderStatement.setInt(2, idOrder);
+			insertOrderStatement.setInt(3, wine.getBottlesNumber());
+			
+			insertOrderStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 }

@@ -12,6 +12,7 @@ import com.rossettimonicadigiorgio.winestoremanagementv2.backend.controllers.Ord
 import com.rossettimonicadigiorgio.winestoremanagementv2.backend.controllers.UserController;
 import com.rossettimonicadigiorgio.winestoremanagementv2.backend.controllers.WineController;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Employee;
+import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Order;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Request;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Response;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.User;
@@ -108,6 +109,11 @@ public class ServerThread implements Runnable {
 						case "listOrders":
 							Object listOrders = (Object) OrderController.getAllOrders();
 							rs = new Response(listOrders);
+							break;
+							
+						case "insertOrder":
+							Object insertOrder = (Object) OrderController.insertOrder(((Order)rq.getParams().get(0)));
+							rs = new Response(insertOrder);
 							break;
 					}
 					

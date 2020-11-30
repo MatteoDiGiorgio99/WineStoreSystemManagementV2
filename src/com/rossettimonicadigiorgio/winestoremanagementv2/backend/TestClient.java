@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Request;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Response;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Wine;
-import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Employee;
 import com.rossettimonicadigiorgio.winestoremanagementv2.frontend.Client;
 
 /**
@@ -21,7 +20,7 @@ public class TestClient {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
-		Employee user = new Employee(-1, "nome", "cognome", "email", "password");
+		//Employee user = new Employee(-1, "nome", "cognome", "email", "password");
 		
 		ArrayList<Object> params = new ArrayList<Object>();  
 		params.add("vi");

@@ -50,7 +50,7 @@ public class Wine implements Serializable {
 	 * @param bottlesnumber purchased bottles number
 	 * @return if the order has been processed correctly
 	 */
-	protected boolean ProcessOrder(int bottlesnumber) {
+	public boolean ProcessOrder(int bottlesnumber) {
 		if(this.BottlesNumber - bottlesnumber < 0)
 			return false;
 		

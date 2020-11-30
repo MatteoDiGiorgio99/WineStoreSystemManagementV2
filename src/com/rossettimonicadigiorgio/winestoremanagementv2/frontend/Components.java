@@ -1,23 +1,11 @@
 package com.rossettimonicadigiorgio.winestoremanagementv2.frontend;
 
-import java.util.ArrayList;
-
-import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Request;
-import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Wine;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -75,12 +63,12 @@ public class Components {
 		title.setFont(Font.font("Arial",FontWeight.BOLD,15));
 		vbox.getChildren().add(title);
 		
-		Hyperlink[] options = new Hyperlink[] {new Hyperlink("My Orders"),new Hyperlink("My Account"),new Hyperlink("My Notifications") };
+		Hyperlink[] options = new Hyperlink[] {new Hyperlink("Last Order"),new Hyperlink("My Account"),new Hyperlink("My Notifications") };
 		for(int i = 0; i<3;i++)
 		{
 			vbox.getChildren().add(options[i]);
 		}
-		options[0].setOnAction(event -> { MainClient.MyOrder(); });
+		options[0].setOnAction(event -> { MainClient.LastOrder(); });
 		options[1].setOnAction(event -> { MainClient.MyAccount(); });
 		options[2].setOnAction(event -> { MainClient.MyNot(); });
 	

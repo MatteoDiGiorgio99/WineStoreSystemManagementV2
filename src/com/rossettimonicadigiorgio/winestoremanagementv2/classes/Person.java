@@ -35,8 +35,8 @@ public abstract class Person implements Serializable {
 	 }
 
 	 /**
-	  * Fetch name of the person
-	  * @return name of the person
+	  * Fetch id of the person
+	  * @return id of the person
 	  */
 	 public int getIDPerson() {return this.idPerson;}
 	 

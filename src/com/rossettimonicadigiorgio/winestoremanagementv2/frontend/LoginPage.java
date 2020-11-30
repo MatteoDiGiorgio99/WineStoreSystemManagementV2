@@ -17,7 +17,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -170,7 +169,7 @@ public class LoginPage {
 	{
 		Stage registerStage = new Stage();
 		GridPane grid = new GridPane();
-		Scene sceneRegister = new Scene (grid,300,300);
+		Scene sceneRegister = new Scene (grid,350,350);
 		grid.setStyle("-fx-background-color: #ABCDEF;");
 		grid.setAlignment(Pos.CENTER);
 		grid.setVgap(10);
@@ -245,10 +244,10 @@ public class LoginPage {
 	
     public static void SignInUser() {
 		
-		Stage SigninStage = new Stage();
+		MainClient.SigninStage = new Stage();
 		BorderPane border = new BorderPane();
 		
-		HBox hboxResearch = Components.HboxResearch(SigninStage);
+		HBox hboxResearch = Components.HboxResearch(MainClient.SigninStage);
 		VBox vboxData = Components.VBoxData();
 		FlowPane flowData = UserPage.ShoppingCart();
 		
@@ -267,9 +266,8 @@ public class LoginPage {
 				
 		Scene sceneSignIn = new Scene(border,1000,600);
 		
-		SigninStage.setTitle("Welcome in your account");
-		SigninStage.setScene(sceneSignIn);
-		SigninStage.show();
-		
+		MainClient.SigninStage.setTitle("Welcome in your account");
+		MainClient.SigninStage.setScene(sceneSignIn);
+		MainClient.SigninStage.show();
 	}
 }

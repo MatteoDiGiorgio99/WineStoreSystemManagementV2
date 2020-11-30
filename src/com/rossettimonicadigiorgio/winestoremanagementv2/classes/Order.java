@@ -36,13 +36,13 @@ public class Order implements Serializable {
 	 * Fetch the current order's ID
 	 * @return the order's ID
 	 */
-	protected int getIDOrder() { return this.IDOrder; }
+	public int getIDOrder() { return this.IDOrder; }
 	
 	/**
 	 * Fetch the current order's status
 	 * @return the status
 	 */
-	protected StatusEnum getStatus() { return this.Status; }
+	public StatusEnum getStatus() { return this.Status; }
 	
 	/**
 	 * Process made by an  employee when ships the order
@@ -54,7 +54,7 @@ public class Order implements Serializable {
 	 * Fetch user's data
 	 * @return user's data
 	 */
-	protected User getUser() { return this.User; }
+	public User getUser() { return this.User; }
 	
 	/**
 	 * Fetch wines that has been ordered 

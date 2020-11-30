@@ -101,7 +101,7 @@ public class WineController {
 		try {
 			Statement stmt =  MySQLConnection.establishConnection().createStatement();
 			
-			String query = "SELECT * FROM wines";
+			String query = "SELECT * FROM wines WHERE IDWine = " + idWine;
 			
 			ResultSet rset = stmt.executeQuery(query);
 			
@@ -134,6 +134,21 @@ public class WineController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+	
+	public static boolean updateWine(Wine wine) {
+		try {
+			String updateQuery = "UPDATE wines SET BottlesNumber = " + wine.getBottlesNumber() + " WHERE IDWine = " + wine.getIDWine();
+			
+			Statement statement = MySQLConnection.establishConnection().createStatement();
+			
+			int rows = statement.executeUpdate(updateQuery);
+			
+			return rows > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 }

@@ -26,7 +26,7 @@ public enum StatusEnum implements Serializable {
 		this.id = id;
 	}
 	
-	int GetID() {
+	public int GetID() {
 		return this.id;
 	}
 }
