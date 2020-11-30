@@ -70,6 +70,7 @@ public class Components {
 		vbox.setPadding(new Insets(10));
 		vbox.setSpacing(8);
 		
+		
 		Text title = new Text("Menu'");
 		title.setFont(Font.font("Arial",FontWeight.BOLD,15));
 		vbox.getChildren().add(title);
@@ -82,7 +83,7 @@ public class Components {
 		options[0].setOnAction(event -> { MainClient.MyOrder(); });
 		options[1].setOnAction(event -> { MainClient.MyAccount(); });
 		options[2].setOnAction(event -> { MainClient.MyNot(); });
-		
+	
 		return vbox ;
 	}
 }

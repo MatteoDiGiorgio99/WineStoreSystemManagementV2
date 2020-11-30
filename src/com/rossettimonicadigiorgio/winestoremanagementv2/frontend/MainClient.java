@@ -147,6 +147,14 @@ public class MainClient extends Application {
 		BorderPane borderMyOrder = new BorderPane();
 		borderMyOrder.setStyle("-fx-background-color:  #ABCDEF;");
 		Scene sceneMyOrder = new Scene (borderMyOrder,500,500);
+		
+		ObservableList<Wine> oblWineCart = FXCollections.observableArrayList();;
+		oblWineCart.addAll(UserPage.listRecorderOrder);
+		ListView<Wine>lsvWineCartOrder = new ListView<Wine>(oblWineCart);
+		
+		
+		borderMyOrder.setCenter(lsvWineCartOrder);
+		
 		stageMyOrder.setScene(sceneMyOrder);
 		stageMyOrder.show();
 	}

@@ -17,6 +17,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -251,13 +252,16 @@ public class LoginPage {
 		VBox vboxData = Components.VBoxData();
 		FlowPane flowData = UserPage.ShoppingCart();
 		
+		
 		GridPane gridData = UserPage.GridData("", flowData);
 		gridData.setPadding(new Insets(30,0,100,100));
+		
 		
 		border.setTop(hboxResearch);
 		border.setLeft(vboxData);
 		border.setCenter(gridData);
 		border.setRight(flowData);
+	
 		
 		Components.addStackPaneResearch(hboxResearch, gridData, flowData);
 				
