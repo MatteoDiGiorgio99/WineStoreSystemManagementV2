@@ -74,7 +74,7 @@ public class UserController {
 			
 			rset.next();
 			
-			int idAdmin = rset.getInt("IDAdministrator");
+			int idAdmin = rset.getInt("IDUser");
 			String name = rset.getString("Name");
 			String surname = rset.getString("Surname");
 			String mailUser = rset.getString("Email");

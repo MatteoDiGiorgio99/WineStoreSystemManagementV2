@@ -17,11 +17,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -82,8 +79,7 @@ public class LoginPage {
         grid.add(lblPassword, 0, 2);
         PasswordField txtPassword = new PasswordField();
         grid.add(txtPassword,1,2);
-        
-        
+                
         RadioButton rdbUser = new RadioButton("User");
         RadioButton rdbAdmin = new RadioButton("Admin");
         RadioButton rdbEmployee = new RadioButton("Employee");
@@ -122,7 +118,7 @@ public class LoginPage {
         			MainClient.user = (User) response.getValue();
         			
         			
-            		SignInUser();
+            		UserPage.SignInUser();
             		txtUser.clear();
             		txtPassword.clear();
         		}
@@ -234,7 +230,7 @@ public class LoginPage {
         		
         		MainClient.user = (User) response.getValue();
         		
-        		SignInUser();
+        		UserPage.SignInUser();
         		
         		txtUser.clear();
         		txtSurname.clear();
@@ -259,38 +255,5 @@ public class LoginPage {
         
         registerStage.setScene(sceneRegister);
         registerStage.show();
-	}
-	
-	/**
-	 * The method SignInUser
-	 * allows the user to handle orders, search and buy new wines 
-	 */
-    public static void SignInUser() {
-		
-		MainClient.SigninStage = new Stage();
-		BorderPane border = new BorderPane();
-		
-		HBox hboxResearch = Components.HboxResearch(MainClient.SigninStage);
-		VBox vboxData = Components.VBoxData();
-		FlowPane flowData = UserPage.ShoppingCart();
-		
-		
-		GridPane gridData = UserPage.GridData("", flowData);
-		gridData.setPadding(new Insets(30,0,100,100));
-		
-		
-		border.setTop(hboxResearch);
-		border.setLeft(vboxData);
-		border.setCenter(gridData);
-		border.setRight(flowData);
-	
-		
-		Components.addStackPaneResearch(hboxResearch, gridData, flowData);
-				
-		Scene sceneSignIn = new Scene(border,1000,600);
-		
-		MainClient.SigninStage.setTitle("Welcome in your account");
-		MainClient.SigninStage.setScene(sceneSignIn);
-		MainClient.SigninStage.show();
 	}
 }

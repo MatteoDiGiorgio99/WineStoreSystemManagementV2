@@ -65,7 +65,6 @@ public class Server {
 	 */
 	public void close(ServerThread thread) {
 		try {
-			System.out.println(this.pool.getTaskCount());
 			this.pool.remove(thread);
 		} catch (Exception e) {
 			e.printStackTrace();

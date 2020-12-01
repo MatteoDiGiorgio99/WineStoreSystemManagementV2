@@ -4,11 +4,45 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import com.rossettimonicadigiorgio.winestoremanagementv2.backend.MySQLConnection;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Notification;
+import com.rossettimonicadigiorgio.winestoremanagementv2.classes.User;
+import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Wine;
 
 public class NotificationController {
+	public static ArrayList<Notification> getNotificationByUser(int idUser) {
+		try {
+			Statement stmt =  MySQLConnection.establishConnection().createStatement();
+			
+			String query = "SELECT * FROM notifications WHERE User = " + idUser;
+			
+			ResultSet rset = stmt.executeQuery(query);
+			
+			ArrayList<Notification> result = new ArrayList<Notification>();
+			
+			while (rset.next()) {
+				int IDNotification = rset.getInt("IDNotification");
+				int IDUser = rset.getInt("User");
+				int IDWine = rset.getInt("Wine");
+				boolean IsNotified = rset.getInt("IsNotified") == 0 ? false : true;
+				
+				Wine wine = WineController.getWineByID(IDWine);
+				User user = UserController.getUserByID(IDUser);
+				
+				Notification notification = new Notification(IDNotification, user, wine, IsNotified);	
+				
+				result.add(notification);
+			}
+			
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	public static Notification insertNotification(Notification notification) {
 		try {
 			String query = "INSERT INTO notifications (User, Wine, IsNotified) VALUES (?, ?, ?)";

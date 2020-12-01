@@ -56,6 +56,7 @@ public class EmployeePage {
 		grid.setPadding(new Insets(0,10,0,10));
 		
 		PieChart chartWine = new PieChart(FXCollections.observableArrayList(new PieChart.Data("UX",50),new PieChart.Data("UY",20),new PieChart.Data("UZ",30)));
+		//Elenco vini e quantità nella observable List
 		chartWine.setTitle("WINES AVAILABLE");
 		grid.getChildren().add(chartWine);
 		return grid;

@@ -22,7 +22,5 @@ public class MySQLConnection {
 			e.printStackTrace();
 			return null;
 		}
-	}
-	
-	
+	}	
 }

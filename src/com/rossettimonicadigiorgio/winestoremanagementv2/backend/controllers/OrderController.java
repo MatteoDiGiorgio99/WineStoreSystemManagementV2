@@ -61,6 +61,49 @@ public class OrderController {
 		}
 	}
 	
+	public static Order getLastOrderForUser(int idUser) {
+		try {
+			Statement stmt =  MySQLConnection.establishConnection().createStatement();
+			
+			String query = "SELECT * FROM orders WHERE User = " + idUser + " ORDER BY IDOrder DESC LIMIT 1";
+			
+			ResultSet rset = stmt.executeQuery(query);
+			
+			rset.next();
+			
+			int idOrder = rset.getInt("IDOrder");
+			int idStatus = rset.getInt("Status");
+			
+			User user = UserController.getUserByID(idUser);
+			StatusEnum status = StatusEnum.values()[idStatus - 1];
+			
+			query = "SELECT * FROM orderwines WHERE OrderNumber = " + idOrder;
+			
+			Statement stmtWines = MySQLConnection.establishConnection().createStatement();
+			ResultSet rsetWines = stmtWines.executeQuery(query);
+			
+			ArrayList<Wine> wines = new ArrayList<Wine>();
+			
+			while(rsetWines.next()) {
+				int idWine = rsetWines.getInt("Wine");
+				int orderBottles = rsetWines.getInt("BottlesNumber");
+				
+				Wine wine = WineController.getWineByID(idWine);
+				
+				wine.setBottlesNumber(orderBottles);
+				
+				wines.add(wine);
+			}
+			
+			Order order = new Order(idOrder, status, user, wines);	
+			
+			return order;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	public static Order insertOrder(Order orderToInsert) {
 		try {
 			String insertOrderQuery = "INSERT INTO orders (Status, User) VALUES (?, ?)";

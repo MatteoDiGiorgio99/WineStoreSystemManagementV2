@@ -30,12 +30,54 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class UserPage {
 	static Order lastOrder;
 	static ArrayList<Notification> userNotifications = new ArrayList<Notification>();
+	
+	/**
+	 * The method SignInUser
+	 * allows the user to handle orders, search and buy new wines 
+	 */
+    public static void SignInUser() {
+		
+		MainClient.SigninStage = new Stage();
+		BorderPane border = new BorderPane();
+		
+		HBox hboxResearch = Components.HboxResearch(MainClient.SigninStage);
+		VBox vboxData = Components.VBoxData();
+		FlowPane flowData = UserPage.ShoppingCart();
+		
+		
+		GridPane gridData = UserPage.GridData("", flowData);
+		gridData.setPadding(new Insets(30,0,100,100));
+		
+		
+		border.setTop(hboxResearch);
+		border.setLeft(vboxData);
+		border.setCenter(gridData);
+		border.setRight(flowData);
+		
+		ArrayList<Object> params = new ArrayList<Object>();
+		params.add(MainClient.user.getIDPerson());
+		
+		UserPage.userNotifications = (ArrayList<Notification>) new Client().run(new Request("listNotification", params)).getValue();
+		
+		params = new ArrayList<Object>();
+		params.add(MainClient.user.getIDPerson());
+		UserPage.lastOrder = (Order) new Client().run(new Request("listOrdersForUser", params)).getValue();
+		
+		Components.addStackPaneResearch(hboxResearch, gridData, flowData);
+				
+		Scene sceneSignIn = new Scene(border,1000,600);
+		
+		MainClient.SigninStage.setTitle("Welcome in your account");
+		MainClient.SigninStage.setScene(sceneSignIn);
+		MainClient.SigninStage.show();
+	}
 	
 	public static GridPane GridData(String filter, FlowPane cartContainer) {
 		GridPane grid = new GridPane();
@@ -171,7 +213,7 @@ public class UserPage {
 			lsvWineCart.getItems().clear();
 			MainClient.listWineCart.clear();
 			MainClient.SigninStage.close();
-            LoginPage.SignInUser();	
+			UserPage.SignInUser();	
 		});
 			
 		return flowWine;
