@@ -2,8 +2,10 @@ package com.rossettimonicadigiorgio.winestoremanagementv2.frontend;
 
 import java.util.ArrayList;
 
+import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Notification;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Order;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Request;
+import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Response;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.StatusEnum;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.User;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Wine;
@@ -11,20 +13,29 @@ import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Wine;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class UserPage {
 	static Order lastOrder;
+	static ArrayList<Notification> userNotifications = new ArrayList<Notification>();
 	
 	public static GridPane GridData(String filter, FlowPane cartContainer) {
 		GridPane grid = new GridPane();
@@ -59,13 +70,33 @@ public class UserPage {
 							wine.setBottlesNumber(wine.getBottlesNumber() + 1);
 							break;
 						}
-						
 					}
 					
 					if(!isInList) {
-						Wine toAdd = row.getItem();
-						toAdd.setBottlesNumber(1);
-						MainClient.listWineCart.add(toAdd);
+						if(row.getItem().getBottlesNumber() == 0) {
+							Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+							alert.setTitle("Notification Request");
+							alert.setHeaderText("There are no more bottles of this wine in stock.");
+							alert.setContentText("Do you want to get a notification?");
+							ButtonType okButton = new ButtonType("YES", ButtonBar.ButtonData.YES);
+							ButtonType noButton = new ButtonType("NO", ButtonBar.ButtonData.NO);
+							alert.getButtonTypes().setAll(okButton, noButton);
+							alert.showAndWait().ifPresent(type -> {
+								if(type.getText() == "YES") {
+									Notification notification = new Notification(-1, (User) MainClient.user, row.getItem(), false);
+									ArrayList<Object> params = new ArrayList<Object>();
+									params.add(notification);
+																		
+									Response response = new Client().run(new Request("insertNotification", params));
+									
+									UserPage.userNotifications.add((Notification) response.getValue());
+								}
+							});
+						} else {
+							Wine toAdd = row.getItem();
+							toAdd.setBottlesNumber(1);
+							MainClient.listWineCart.add(toAdd);	
+						}
 					}
 					
 					cartContainer.getChildren().clear();
@@ -98,7 +129,8 @@ public class UserPage {
 		
 		if(MainClient.listWineCart.size() <= 0)
 			return flowWine;
-		ObservableList<Wine> oblWineCart = FXCollections.observableArrayList();;
+		
+		ObservableList<Wine> oblWineCart = FXCollections.observableArrayList();
 		oblWineCart.addAll(MainClient.listWineCart);
 		ListView<Wine> lsvWineCart = new ListView<Wine>(oblWineCart);
 		
@@ -129,7 +161,7 @@ public class UserPage {
 				ReviewOrder.setContentText("your order was successful!");
 				ReviewOrder.showAndWait();	
 			} else {
-				Alert ReviewOrder = new Alert(AlertType.INFORMATION);
+				Alert ReviewOrder = new Alert(AlertType.ERROR);
 				ReviewOrder.setTitle("Status Order");
 				ReviewOrder.setHeaderText("SORRY");
 				ReviewOrder.setContentText("your order was not successfull!");
@@ -141,9 +173,68 @@ public class UserPage {
 			MainClient.SigninStage.close();
             LoginPage.SignInUser();	
 		});
-		
-		
+			
 		return flowWine;
 	}
+	
+	public static void MyAccount() {
+		Stage stageMyAccount = new Stage();
+		stageMyAccount.setTitle("Summary Account");
+		BorderPane borderMyAccount = new BorderPane();
+		borderMyAccount.setStyle("-fx-background-color:  #ABCDEF;");
+		Scene sceneMyAccount = new Scene (borderMyAccount,500,500);
+		GridPane grid = new GridPane();
+		grid.setAlignment(Pos.CENTER);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(25,25,25,25));
+		 
+        Label lblUser = new Label("Name: ");
+        grid.add(lblUser, 0, 1);
+        TextField txtUser = new TextField();
+        txtUser.setEditable(false);
+        txtUser.setText(MainClient.user.getName());;
+        grid.add(txtUser,1,1);
+        
+        Label lblSurname = new Label("Surname: ");
+        grid.add(lblSurname, 0, 2);
+        TextField txtSurname = new TextField();
+        txtSurname.setEditable(false);
+        txtSurname.setText(MainClient.user.getSurname());
+        grid.add(txtSurname,1,2);
+        
+        Label lblEmail = new Label("Email: ");
+        grid.add(lblEmail, 0, 3);
+        TextField txtEmail = new TextField();
+        txtEmail.setEditable(false);
+        txtEmail.setText(MainClient.user.getEmail());
+        grid.add(txtEmail,1,3);
+        
+        Label lblPassword = new Label("Password: ");
+        grid.add(lblPassword, 0,4);
+        TextField txtPassword = new TextField();
+        txtPassword.setEditable(false);
+        txtPassword.setText(MainClient.user.getPassword());
+        grid.add(txtPassword,1,4);
+        
+        borderMyAccount.setCenter(grid);
 		
+		stageMyAccount.setScene(sceneMyAccount);
+		stageMyAccount.show();
+	}
+	
+	public static void MyNot() {
+		Stage stageMyNot = new Stage();
+		BorderPane borderMyNot = new BorderPane();
+		borderMyNot.setStyle("-fx-background-color:  #ABCDEF;");
+		Scene sceneMyNot = new Scene (borderMyNot,500,500);
+		
+		ObservableList<Notification> oblUserNotification = FXCollections.observableArrayList();
+		oblUserNotification.addAll(UserPage.userNotifications);
+		
+		ListView<Notification> listNot = new ListView<Notification>(oblUserNotification);
+		borderMyNot.setCenter(listNot);
+		
+		stageMyNot.setScene(sceneMyNot);
+		stageMyNot.show();
+	}
 }

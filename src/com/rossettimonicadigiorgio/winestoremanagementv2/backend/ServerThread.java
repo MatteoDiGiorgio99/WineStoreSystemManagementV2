@@ -8,10 +8,12 @@ import java.net.Socket;
 
 import com.rossettimonicadigiorgio.winestoremanagementv2.backend.controllers.AdministratorController;
 import com.rossettimonicadigiorgio.winestoremanagementv2.backend.controllers.EmployeeController;
+import com.rossettimonicadigiorgio.winestoremanagementv2.backend.controllers.NotificationController;
 import com.rossettimonicadigiorgio.winestoremanagementv2.backend.controllers.OrderController;
 import com.rossettimonicadigiorgio.winestoremanagementv2.backend.controllers.UserController;
 import com.rossettimonicadigiorgio.winestoremanagementv2.backend.controllers.WineController;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Employee;
+import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Notification;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Order;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Request;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Response;
@@ -114,6 +116,11 @@ public class ServerThread implements Runnable {
 						case "insertOrder":
 							Object insertOrder = (Object) OrderController.insertOrder(((Order)rq.getParams().get(0)));
 							rs = new Response(insertOrder);
+							break;
+							
+						case "insertNotification":
+							Object insertNotification = (Object) NotificationController.insertNotification(((Notification)rq.getParams().get(0)));
+							rs = new Response(insertNotification);
 							break;
 					}
 					

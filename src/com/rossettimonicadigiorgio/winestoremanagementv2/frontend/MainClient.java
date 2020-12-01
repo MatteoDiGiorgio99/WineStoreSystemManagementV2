@@ -105,67 +105,6 @@ public class MainClient extends Application {
 		
 	}
 
-	public static void MyNot() {
-		
-		Stage stageMyNot = new Stage();
-		BorderPane borderMyNot = new BorderPane();
-		borderMyNot.setStyle("-fx-background-color:  #ABCDEF;");
-		Scene sceneMyNot = new Scene (borderMyNot,500,500);
-		
-		ListView<Notification> listNot = new ListView<Notification>();
-		borderMyNot.setCenter(listNot);
-		
-		stageMyNot.setScene(sceneMyNot);
-		stageMyNot.show();
-	}
-
-	public static void MyAccount() {
-		
-		Stage stageMyAccount = new Stage();
-		stageMyAccount.setTitle("Summary Account");
-		BorderPane borderMyAccount = new BorderPane();
-		borderMyAccount.setStyle("-fx-background-color:  #ABCDEF;");
-		Scene sceneMyAccount = new Scene (borderMyAccount,500,500);
-		GridPane grid = new GridPane();
-		grid.setAlignment(Pos.CENTER);
-		grid.setVgap(10);
-		grid.setPadding(new Insets(25,25,25,25));
-		 
-        Label lblUser = new Label("Name: ");
-        grid.add(lblUser, 0, 1);
-        TextField txtUser = new TextField();
-        txtUser.setEditable(false);
-        txtUser.setText(user.getName());;
-        grid.add(txtUser,1,1);
-        
-        Label lblSurname = new Label("Surname: ");
-        grid.add(lblSurname, 0, 2);
-        TextField txtSurname = new TextField();
-        txtSurname.setEditable(false);
-        txtSurname.setText(user.getSurname());
-        grid.add(txtSurname,1,2);
-        
-        Label lblEmail = new Label("Email: ");
-        grid.add(lblEmail, 0, 3);
-        TextField txtEmail = new TextField();
-        txtEmail.setEditable(false);
-        txtEmail.setText(user.getEmail());
-        grid.add(txtEmail,1,3);
-        
-        Label lblPassword = new Label("Password: ");
-        grid.add(lblPassword, 0,4);
-        TextField txtPassword = new TextField();
-        txtPassword.setEditable(false);
-        txtPassword.setText(user.getPassword());
-        grid.add(txtPassword,1,4);
-        
-        borderMyAccount.setCenter(grid);
-		
-		stageMyAccount.setScene(sceneMyAccount);
-		stageMyAccount.show();
-		
-	}
-
 	public static void LastOrder() {
 		if(UserPage.lastOrder == null)
 			return;

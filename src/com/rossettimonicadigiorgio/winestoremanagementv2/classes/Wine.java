@@ -69,7 +69,7 @@ public class Wine implements Serializable {
 	
     @Override
     public String toString() { 
-        return String.format(this.Name + ": $" + this.Price + " | " + this.BottlesNumber + " bottles in the cart"); 
+        return String.format(this.Name + ": $" + this.Price + " | " + this.BottlesNumber + " bottles selected"); 
     } 
 
 	/**

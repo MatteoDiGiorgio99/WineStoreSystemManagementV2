@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Nov 28, 2020 alle 17:00
+-- Creato il: Dic 01, 2020 alle 11:31
 -- Versione del server: 10.4.14-MariaDB
 -- Versione PHP: 7.4.11
 
@@ -51,6 +51,20 @@ CREATE TABLE `employees` (
   `Surname` varchar(30) NOT NULL,
   `Email` varchar(30) NOT NULL,
   `Password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `notifications`
+--
+
+DROP TABLE IF EXISTS `notifications`;
+CREATE TABLE `notifications` (
+  `IDNotification` int(11) NOT NULL,
+  `User` int(11) NOT NULL,
+  `Wine` int(11) NOT NULL,
+  `IsNotified` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -176,6 +190,14 @@ ALTER TABLE `employees`
   ADD UNIQUE KEY `employeesEmailUnique` (`Email`) USING BTREE;
 
 --
+-- Indici per le tabelle `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`IDNotification`),
+  ADD KEY `User` (`User`),
+  ADD KEY `FK_Notifications_Wines` (`Wine`);
+
+--
 -- Indici per le tabelle `orders`
 --
 ALTER TABLE `orders`
@@ -241,6 +263,12 @@ ALTER TABLE `employees`
   MODIFY `IDEmployee` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT per la tabella `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `IDNotification` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT per la tabella `orders`
 --
 ALTER TABLE `orders`
@@ -285,6 +313,12 @@ ALTER TABLE `wines`
 --
 -- Limiti per le tabelle scaricate
 --
+
+--
+-- Limiti per la tabella `notifications`
+--
+ALTER TABLE `notifications`
+  ADD CONSTRAINT `FK_Notifications_Wines` FOREIGN KEY (`Wine`) REFERENCES `wines` (`IDWine`) ON UPDATE NO ACTION;
 
 --
 -- Limiti per la tabella `orders`

@@ -69,8 +69,8 @@ public class Components {
 			vbox.getChildren().add(options[i]);
 		}
 		options[0].setOnAction(event -> { MainClient.LastOrder(); });
-		options[1].setOnAction(event -> { MainClient.MyAccount(); });
-		options[2].setOnAction(event -> { MainClient.MyNot(); });
+		options[1].setOnAction(event -> { UserPage.MyAccount(); });
+		options[2].setOnAction(event -> { UserPage.MyNot(); });
 	
 		return vbox ;
 	}
