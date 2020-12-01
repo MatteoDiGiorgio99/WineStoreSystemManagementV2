@@ -14,7 +14,18 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * The {@code EmployeePage} is a class that defines:
+ * The graphic of the EmployeePage
+ * @author 297398
+ *
+ */
 public class EmployeePage {
+	
+	/**
+	 * The method SignInEmployee
+	 * When pressed the button takes you to a new page 
+	 */
 	public static void SignInEmployee() {
 		
 		Stage SigninStage = new Stage();
@@ -34,6 +45,10 @@ public class EmployeePage {
 		SigninStage.show();
 	}
 	
+	/**
+	 * The method GridDataEmployee
+	 * show to the employee a graphic of wine bottle in the database
+	 */
 	public static GridPane GridDataEmployee() {
 		GridPane grid = new GridPane();
 		grid.setHgap(10);
@@ -46,6 +61,10 @@ public class EmployeePage {
 		return grid;
 	}
 	
+	/**
+	 * The method VBoxDataEmployee
+	 * allows the Employee to ship or restock bottle of wines
+	 */
 	public static VBox VBoxDataEmployee() {
 		VBox vbox = new VBox();
 		vbox.setPadding(new Insets(10));

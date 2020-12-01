@@ -6,7 +6,18 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * The {@code AdminPage} is a class that defines:
+ * The graphic of the AdminPage
+ * @author 297402
+ *
+ */
 public class AdminPage {
+	
+	/**
+	 * The method SignInAdmin 
+	 * When pressed the button takes you to a new page 
+	 */
 	public static void SignInAdmin() {
 		
 		Stage SigninStage = new Stage();

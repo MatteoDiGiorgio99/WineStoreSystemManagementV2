@@ -26,7 +26,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * The {@code LoginPage} is a class that defines:
+ * The graphic of the LoginPage
+ * @author 297398
+ *
+ */
 public class LoginPage {
+	
+	/**
+	 * The method ControlRdb
+	 * controls the type of user tries to Login
+	 */
 	private static void ControlRdb(RadioButton rdbUser, RadioButton rdbAdmin, RadioButton rdbEmployee)  {
 		
 		if(rdbUser.isSelected()==true)
@@ -47,6 +58,10 @@ public class LoginPage {
 		
 	}
 	
+	/**
+	 * The method Login
+	 * When pressed the button take you to a new page 
+	 */
 	public static void Login()
 	{
 		Stage loginStage = new Stage();
@@ -165,6 +180,10 @@ public class LoginPage {
         
 	}
 	
+	/**
+	 * The method Register
+	 * When pressed the button take you to a new page 
+	 */
 	public static void Register()
 	{
 		Stage registerStage = new Stage();
@@ -242,6 +261,10 @@ public class LoginPage {
         registerStage.show();
 	}
 	
+	/**
+	 * The method SignInUser
+	 * allows the user to handle orders, search and buy new wines 
+	 */
     public static void SignInUser() {
 		
 		MainClient.SigninStage = new Stage();
