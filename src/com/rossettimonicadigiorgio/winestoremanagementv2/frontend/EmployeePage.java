@@ -5,6 +5,9 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -28,38 +31,20 @@ public class EmployeePage {
 	 */
 	public static void SignInEmployee() {
 		
-		Stage SigninStage = new Stage();
+		Stage SigninStage= new Stage();
 		BorderPane border = new BorderPane();
 		
 		HBox hboxResearch = Components.HboxResearch(SigninStage);
 		VBox vboxData = VBoxDataEmployee();
-		GridPane gridData = EmployeePage.GridDataEmployee();
-		border.setTop(hboxResearch);
-		border.setLeft(vboxData);
-		border.setRight(gridData);
 		
-		Scene sceneSignIn = new Scene(border,1000,600);
+		border.setTop(hboxResearch);
+		border.setCenter(vboxData);
+		
+		Scene sceneSignIn = new Scene(border,500,500);
 		
 		SigninStage.setTitle("Welcome in your account");
 		SigninStage.setScene(sceneSignIn);
 		SigninStage.show();
-	}
-	
-	/**
-	 * The method GridDataEmployee
-	 * show to the employee a graphic of wine bottle in the database
-	 */
-	public static GridPane GridDataEmployee() {
-		GridPane grid = new GridPane();
-		grid.setHgap(10);
-		grid.setVgap(10);
-		grid.setPadding(new Insets(0,10,0,10));
-		
-		PieChart chartWine = new PieChart(FXCollections.observableArrayList(new PieChart.Data("UX",50),new PieChart.Data("UY",20),new PieChart.Data("UZ",30)));
-		//Elenco vini e quantità nella observable List
-		chartWine.setTitle("WINES AVAILABLE");
-		grid.getChildren().add(chartWine);
-		return grid;
 	}
 	
 	/**
@@ -68,11 +53,11 @@ public class EmployeePage {
 	 */
 	public static VBox VBoxDataEmployee() {
 		VBox vbox = new VBox();
-		vbox.setPadding(new Insets(10));
+		vbox.setPadding(new Insets(100,200,200,200));
 		vbox.setSpacing(8);
 		
 		Text title = new Text("Menu'");
-		title.setFont(Font.font("Arial",FontWeight.BOLD,15));
+		title.setFont(Font.font("Arial",FontWeight.BOLD,25));
 		vbox.getChildren().add(title);
 		
 		Hyperlink[] options = new Hyperlink[] {new Hyperlink("Ship"),new Hyperlink("Restock Bottle")};
@@ -80,6 +65,10 @@ public class EmployeePage {
 		{
 			vbox.getChildren().add(options[i]);
 		}
+		
+	    options[0].setFont(Font.font("Arial",13));
+	    options[1].setFont(Font.font("Arial",13));
+	    
 		options[0].setOnAction(event -> { MainClient.Ship(); });
 		options[1].setOnAction(event -> { MainClient.RestockBottle(); });
 		

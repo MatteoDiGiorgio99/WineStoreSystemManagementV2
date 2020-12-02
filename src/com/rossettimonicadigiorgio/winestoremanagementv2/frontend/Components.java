@@ -48,7 +48,6 @@ public class Components {
 		
 		return hbox;
 	}
-	
 	/**
 	 * The method addStackPaneResearch
 	 * add a button for the textbox research 
