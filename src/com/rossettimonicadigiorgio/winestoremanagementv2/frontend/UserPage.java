@@ -20,6 +20,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
@@ -32,6 +33,9 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -63,7 +67,7 @@ public class UserPage {
 		BorderPane border = new BorderPane();
 		
 		HBox hboxResearch = Components.HboxResearch(MainClient.SigninStage);
-		VBox vboxData = Components.VBoxData();
+		VBox vboxData = UserPage.VBoxData();
 		FlowPane flowData = UserPage.ShoppingCart();
 		
 		
@@ -311,5 +315,58 @@ public class UserPage {
 		
 		stageMyNot.setScene(sceneMyNot);
 		stageMyNot.show();
+	}
+	
+	/**
+	 * The method LastOrder 
+	 * allows user to see last orders 
+	 */
+	public static void LastOrder() {
+		if(UserPage.lastOrder == null)
+			return;
+		
+		Stage stageMyOrder = new Stage();
+		BorderPane borderMyOrder = new BorderPane();
+		borderMyOrder.setStyle("-fx-background-color:  #ABCDEF;");
+		Scene sceneMyOrder = new Scene (borderMyOrder,500,500);
+		
+		ObservableList<Wine> oblWineCart = FXCollections.observableArrayList();
+		
+		oblWineCart.addAll(UserPage.lastOrder.getWines());
+		
+		ListView<Wine>lsvWineCartOrder = new ListView<Wine>(oblWineCart);
+		
+		
+		borderMyOrder.setCenter(lsvWineCartOrder);
+		
+		stageMyOrder.setScene(sceneMyOrder);
+		stageMyOrder.show();
+	}
+	
+	/**
+	 * The method VBoxData
+	 * allows the user to see the latest orders,notifications and his account 
+	 */
+	public static VBox VBoxData() {
+		VBox vbox = new VBox();
+		vbox.setPadding(new Insets(10));
+		vbox.setSpacing(8);
+		
+		
+		Text title = new Text("Menu'");
+		title.setFont(Font.font("Arial",FontWeight.BOLD,15));
+		vbox.getChildren().add(title);
+		
+		Hyperlink[] options = new Hyperlink[] {new Hyperlink("Last Order"),new Hyperlink("My Account"),new Hyperlink("My Notifications") };
+		for(int i = 0; i<3;i++)
+		{
+			vbox.getChildren().add(options[i]);
+		}
+		
+		options[0].setOnAction(event -> { UserPage.LastOrder(); });
+		options[1].setOnAction(event -> { UserPage.MyAccount(); });
+		options[2].setOnAction(event -> { UserPage.MyNot(); });
+	
+		return vbox ;
 	}
 }

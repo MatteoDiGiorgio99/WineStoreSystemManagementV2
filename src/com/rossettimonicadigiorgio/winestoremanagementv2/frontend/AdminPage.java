@@ -8,18 +8,20 @@ import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Request;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.User;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Wine;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -84,7 +86,7 @@ public class AdminPage {
 		psswCol.setCellValueFactory(new PropertyValueFactory<>("password"));
 		
 		
-        ArrayList<User> result = (ArrayList<User>) new Client().run(new Request("listUser", null)).getValue();
+        ArrayList<User> result = (ArrayList<User>) new Client().run(new Request("listUsers", null)).getValue();
 		
 		tbvClient.getColumns().addAll(nameCol,surnameCol,emailCol,psswCol);
 		
@@ -116,7 +118,7 @@ public class AdminPage {
 		psswCol.setCellValueFactory(new PropertyValueFactory<>("password"));
 		
 		
-        ArrayList<Employee> result = (ArrayList<Employee>) new Client().run(new Request("listEmployee", null)).getValue();
+        ArrayList<Employee> result = (ArrayList<Employee>) new Client().run(new Request("listEmployees", null)).getValue();
 		
 		tbvEmployee.getColumns().addAll(nameCol,surnameCol,emailCol,psswCol);
 		
@@ -141,12 +143,12 @@ public class AdminPage {
 		TableColumn<Order, String> statusCol = new TableColumn<Order, String>("Status");
 		statusCol.setCellValueFactory(new PropertyValueFactory<>("Status"));
 		
-		//TableColumn<Order, Integer> yearCol = new TableColumn<Order, Integer>("Number Items");
-		//yearCol.setCellValueFactory(new PropertyValueFactory<>(Order.Wines.size()));
+		TableColumn<Order, Integer> itemsCol = new TableColumn<Order, Integer>("Number Items");
+		itemsCol.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getWines().size()).asObject());
 		
         ArrayList<Order> result = (ArrayList<Order>) new Client().run(new Request("listOrders", null)).getValue();
 		
-		tbvOrder.getColumns().addAll(numordCol,statusCol);
+		tbvOrder.getColumns().addAll(numordCol,statusCol, itemsCol);
 		
 		tbvOrder.getItems().clear();
 	    tbvOrder.getItems().addAll(result);
@@ -191,6 +193,7 @@ public class AdminPage {
 		grid.getChildren().add(tbvWine);
 		return grid;
 	}
+    
 	public static GridPane GridDataAdmin() {
 		GridPane grid = new GridPane();
 		grid.setHgap(10);
@@ -273,7 +276,6 @@ public class AdminPage {
 	}
 
 	private static void InfoClients() {
-		
 		Stage stageInfCli = new Stage();
 		BorderPane borderInfCli = new BorderPane();
 		borderInfCli.setStyle("-fx-background-color:  #ABCDEF;");
@@ -288,7 +290,6 @@ public class AdminPage {
 	}
 
 	private static void AddEmployee() {
-
 		Stage stageAddEmp = new Stage();
 		stageAddEmp.setTitle("Set Account Employee");
 		BorderPane borderAddEmp = new BorderPane();
@@ -324,13 +325,31 @@ public class AdminPage {
         grid.add(btnAddEmp, 1, 5);
         
         btnAddEmp.setOnAction(event -> {
-        	//Inserire Employee
+        	Employee employee = new Employee(-1, txtUser.getText(), txtSurname.getText(), txtEmail.getText(), txtPassword.getText());
+        	
+    		ArrayList<Object> params = new ArrayList<Object>();
+    		params.add(employee);
+        	
+        	if((boolean) new Client().run(new Request("employeeRegister", params)).getValue()) {
+				Alert addEmployee = new Alert(AlertType.INFORMATION);
+				addEmployee.setTitle("Employee Added");
+				addEmployee.setHeaderText("SUCCESS");
+				addEmployee.setContentText("The operation has completed successfully");
+				addEmployee.showAndWait();
+        	} else {
+        		Alert addEmployee = new Alert(AlertType.ERROR);
+				addEmployee.setTitle("Employee Added");
+				addEmployee.setHeaderText("ERROR");
+				addEmployee.setContentText("The operation is failed!");
+				addEmployee.showAndWait();
+        	}
+        	
+        	stageAddEmp.close();
         });
         
         borderAddEmp.setCenter(grid);
 		
 		stageAddEmp.setScene(sceneAddEmp);
 		stageAddEmp.show();
-		
 	}
 }

@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import com.rossettimonicadigiorgio.winestoremanagementv2.backend.MySQLConnection;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.User;
@@ -58,6 +59,35 @@ public class UserController {
 	        User insertedUser = new User(idUser, user.getName(), user.getSurname(), user.getEmail(), user.getPassword());
 			
 			return insertedUser;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static ArrayList<User> getUsers() {
+		try {
+			Statement stmt =  MySQLConnection.establishConnection().createStatement();
+			
+			String query = "SELECT * FROM users ";
+			
+			ResultSet rset = stmt.executeQuery(query);
+			
+			ArrayList<User> users = new ArrayList<User>();
+			
+			while(rset.next()) {
+				int idAdmin = rset.getInt("IDUser");
+				String name = rset.getString("Name");
+				String surname = rset.getString("Surname");
+				String mailUser = rset.getString("Email");
+				String passwordUser = rset.getString("Password");
+				
+				User user = new User(idAdmin, name, surname, mailUser, passwordUser);
+				
+				users.add(user);
+			}
+						
+			return users;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;

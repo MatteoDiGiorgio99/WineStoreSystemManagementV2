@@ -71,4 +71,19 @@ public class NotificationController {
 			return null;
 		}
 	}
+	
+	public static boolean updateNotificationByWine(int idWine) {
+		try {
+			Statement stmt =  MySQLConnection.establishConnection().createStatement();
+			
+			String query = "UPDATE notifications SET IsNotified = 1 WHERE Wine = " + idWine;
+			
+			stmt.executeUpdate(query);
+			
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

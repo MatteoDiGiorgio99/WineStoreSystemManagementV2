@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import com.rossettimonicadigiorgio.winestoremanagementv2.backend.MySQLConnection;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Employee;
@@ -51,6 +52,35 @@ public class EmployeeController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	public static ArrayList<Employee> getEmployees() {
+		try {
+			Statement stmt =  MySQLConnection.establishConnection().createStatement();
+			
+			String query = "SELECT * FROM employees";
+			
+			ResultSet rset = stmt.executeQuery(query);
+			
+			ArrayList<Employee> employees = new ArrayList<Employee>();
+			
+			while(rset.next()) {
+				int idEmployee = rset.getInt("IDEmployee");
+				String name = rset.getString("Name");
+				String surname = rset.getString("Surname");
+				String mailUser = rset.getString("Email");
+				String passwordUser = rset.getString("Password");
+				
+				Employee employee = new Employee(idEmployee, name, surname, mailUser, passwordUser);
+				
+				employees.add(employee);
+			}
+						
+			return employees;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 }

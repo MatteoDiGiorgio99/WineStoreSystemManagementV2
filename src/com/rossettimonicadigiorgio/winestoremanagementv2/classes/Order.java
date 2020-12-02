@@ -61,4 +61,10 @@ public class Order implements Serializable {
 	 * @return wines that has been ordered
 	 */
 	public List<Wine> getWines() { return this.Wines; }
+	
+    @Override
+    public String toString() { 
+        return String.format("Order %d | Status: %s | %d Products", this.IDOrder, this.Status, this.Wines.size()); 
+    } 
+
 }

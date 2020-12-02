@@ -12,6 +12,7 @@ import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Order;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Request;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Response;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.User;
+import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Wine;
 
 public class HandleRequest {
 	static Response run (Request rq) {
@@ -48,6 +49,21 @@ public class HandleRequest {
 				rs = new Response(filterWines);
 				break;
 				
+			case "restockWine":
+				Object restockWine = (Object) WineController.restockWine((Wine)rq.getParams().get(0));
+				rs = new Response(restockWine);
+				break;
+				
+			case "listUsers":
+				Object listUsers = (Object) UserController.getUsers();
+				rs = new Response(listUsers);
+				break;
+				
+			case "listEmployees":
+				Object listEmployees = (Object) EmployeeController.getEmployees();
+				rs = new Response(listEmployees);
+				break;
+				
 			case "listWines":
 				Object listWines = (Object) WineController.getAllWines();
 				rs = new Response(listWines);
@@ -58,6 +74,11 @@ public class HandleRequest {
 				rs = new Response(listOrders);
 				break;
 				
+			case "listOrdersToShip":
+				Object listOrdersToShip = (Object) OrderController.getOrdersToShip();
+				rs = new Response(listOrdersToShip);
+				break;
+				
 			case "listOrdersForUser":
 				Object listOrdersForUser = (Object) OrderController.getLastOrderForUser((int)rq.getParams().get(0));
 				rs = new Response(listOrdersForUser);
@@ -66,6 +87,11 @@ public class HandleRequest {
 			case "insertOrder":
 				Object insertOrder = (Object) OrderController.insertOrder(((Order)rq.getParams().get(0)));
 				rs = new Response(insertOrder);
+				break;
+				
+			case "shipOrder":
+				Object shipOrder = (Object) OrderController.shipOrder(((int)rq.getParams().get(0)));
+				rs = new Response(shipOrder);
 				break;
 
 			case "listNotification":

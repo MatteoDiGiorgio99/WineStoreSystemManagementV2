@@ -48,6 +48,7 @@ public class Components {
 		
 		return hbox;
 	}
+	
 	/**
 	 * The method addStackPaneResearch
 	 * add a button for the textbox research 
@@ -70,31 +71,5 @@ public class Components {
 		});
 		
 		hboxResearch.getChildren().add(stack);
-	}
-	
-	/**
-	 * The method VBoxData
-	 * allows the user to see the latest orders,notifications and his account 
-	 */
-	public static VBox VBoxData() {
-		VBox vbox = new VBox();
-		vbox.setPadding(new Insets(10));
-		vbox.setSpacing(8);
-		
-		
-		Text title = new Text("Menu'");
-		title.setFont(Font.font("Arial",FontWeight.BOLD,15));
-		vbox.getChildren().add(title);
-		
-		Hyperlink[] options = new Hyperlink[] {new Hyperlink("Last Order"),new Hyperlink("My Account"),new Hyperlink("My Notifications") };
-		for(int i = 0; i<3;i++)
-		{
-			vbox.getChildren().add(options[i]);
-		}
-		options[0].setOnAction(event -> { MainClient.LastOrder(); });
-		options[1].setOnAction(event -> { UserPage.MyAccount(); });
-		options[2].setOnAction(event -> { UserPage.MyNot(); });
-	
-		return vbox ;
 	}
 }

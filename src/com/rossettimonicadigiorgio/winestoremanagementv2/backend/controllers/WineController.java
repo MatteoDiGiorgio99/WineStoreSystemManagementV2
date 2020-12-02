@@ -151,4 +151,21 @@ public class WineController {
 			return false;
 		}
 	}
+	
+	public static boolean restockWine(Wine wine) {
+		try {
+			String updateQuery = "UPDATE wines SET BottlesNumber = BottlesNumber + " + wine.getBottlesNumber() + " WHERE IDWine = " + wine.getIDWine();
+			
+			Statement statement = MySQLConnection.establishConnection().createStatement();
+			
+			NotificationController.updateNotificationByWine(wine.getIDWine());
+			
+			int rows = statement.executeUpdate(updateQuery);
+			
+			return rows > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }
