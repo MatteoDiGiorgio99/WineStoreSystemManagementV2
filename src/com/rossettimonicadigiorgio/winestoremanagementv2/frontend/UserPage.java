@@ -34,8 +34,23 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * The {@code UserPage} is a class that defines:
+ * User page
+ * 
+ * @author 297398
+ *
+ */
 public class UserPage {
+	
+	/**
+	 * Global variable
+	 */
 	static Order lastOrder;
+	
+	/**
+	 * Global ArrayList
+	 */
 	static ArrayList<Notification> userNotifications = new ArrayList<Notification>();
 	
 	/**
@@ -79,6 +94,12 @@ public class UserPage {
 		MainClient.SigninStage.show();
 	}
 	
+    /**
+     * The method GridData
+     * @param filter the filter to search for a specific type of wine
+     * @param cartContainer the contents of the cart
+     * @return Updated table
+     */
 	public static GridPane GridData(String filter, FlowPane cartContainer) {
 		GridPane grid = new GridPane();
 		grid.setHgap(20);
@@ -163,7 +184,12 @@ public class UserPage {
 		grid.getChildren().add(tbvWine);
 		return grid;
 	}
-		
+	
+	/**
+	 * The method ShoppingCart
+	 * allows the user to buy wines selected 
+	 * @return the cart updated 
+	 */
 	public static FlowPane ShoppingCart() {			
 
 		FlowPane flowWine = new FlowPane();
@@ -219,6 +245,10 @@ public class UserPage {
 		return flowWine;
 	}
 	
+	/**
+	 * The method MyAccount 
+	 * allows the users to see their accounts
+	 */
 	public static void MyAccount() {
 		Stage stageMyAccount = new Stage();
 		stageMyAccount.setTitle("Summary Account");
@@ -263,7 +293,10 @@ public class UserPage {
 		stageMyAccount.setScene(sceneMyAccount);
 		stageMyAccount.show();
 	}
-	
+	/**
+	 * The method MyNot
+	 * allows users to see their notification
+	 */
 	public static void MyNot() {
 		Stage stageMyNot = new Stage();
 		BorderPane borderMyNot = new BorderPane();

@@ -29,6 +29,11 @@ public class MainClient extends Application {
 	static Stage SigninStage = new Stage();
 
 	@Override
+	
+	/**
+	 * The method Start
+	 * The starting page
+	 */
 	public void start(final Stage primaryStage) throws FileNotFoundException {	
 		
 		BorderPane root = new BorderPane();
@@ -53,7 +58,12 @@ public class MainClient extends Application {
 		primaryStage.show();
 	}
 	
-	private HBox addHBox() throws FileNotFoundException {
+	/**
+	 * The method addHbox
+	 * allows to put button in the first page
+	 * @return a horizontal sequence of buttons
+	 */
+	private HBox addHBox() {
 		HBox hbox = new HBox();
 		
 		hbox.setStyle("-fx-background-color:  #ABCDEF;");
@@ -83,6 +93,10 @@ public class MainClient extends Application {
 		return hbox;
 	}
 
+	/*
+	 * The method RestockBottle
+	 * allows the Employee to restock wines bottle
+	 */
 	public static void RestockBottle() {
 		
 		Stage stageRestock = new Stage();
@@ -121,6 +135,10 @@ public class MainClient extends Application {
 		
 	}
 
+	/**
+	 * The method Ship
+	 * allows the Employee to ship orders
+	 */
 	public static void Ship() {
 		
 		Stage stageShip = new Stage();
@@ -152,6 +170,10 @@ public class MainClient extends Application {
 		
 	}
 
+	/**
+	 * The method LastOrder 
+	 * allows user to see last orders 
+	 */
 	public static void LastOrder() {
 		if(UserPage.lastOrder == null)
 			return;

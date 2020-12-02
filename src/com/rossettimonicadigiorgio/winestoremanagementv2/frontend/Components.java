@@ -16,7 +16,20 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * The {@code Component} is a class that defines:
+ * The component of user interface
+ * @author 297402
+ *
+ */
 public class Components {
+	
+	/**
+	 * The method HboxResearch
+	 * add the textbox for the research 
+	 * @param logoutStage takes you back to the login stage
+	 * @return hbox which contains selected things
+	 */
 	public static HBox HboxResearch(Stage logoutStage) {
 		
 		HBox hbox = new HBox();
@@ -36,6 +49,13 @@ public class Components {
 		return hbox;
 	}
 	
+	/**
+	 * The method addStackPaneResearch
+	 * add a button for the textbox research 
+	 * @param hboxResearch textbox research
+	 * @param grid the table of wine
+	 * @param cartFlow the shopping cart
+	 */
 	public static void addStackPaneResearch(HBox hboxResearch, GridPane grid, FlowPane cartFlow) {
 		StackPane stack = new StackPane();
 		TextField txtResearch = new TextField();
@@ -52,7 +72,11 @@ public class Components {
 		
 		hboxResearch.getChildren().add(stack);
 	}
-		
+	
+	/**
+	 * The method VBoxData
+	 * allows the user to see the latest orders,notifications and his account 
+	 */
 	public static VBox VBoxData() {
 		VBox vbox = new VBox();
 		vbox.setPadding(new Insets(10));
