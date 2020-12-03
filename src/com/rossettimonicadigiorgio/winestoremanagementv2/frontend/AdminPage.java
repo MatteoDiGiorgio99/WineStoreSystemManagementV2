@@ -66,6 +66,12 @@ public class AdminPage {
 		
 	}
 	
+	/**
+	 * The method GridDataClient
+	 * show all information of a users to the admin
+	 * @param string users to search
+	 * @return updated table
+	 */
 	private static GridPane GridDataClients(String string) {
 		GridPane grid = new GridPane();
 		grid.setHgap(20);
@@ -98,6 +104,13 @@ public class AdminPage {
 	    
 		return grid;
 	}
+	
+	/**
+	 * The method GridDataEmployee
+	 * show all information of a employees to the admin
+	 * @param string employees to search
+	 * @return updated table
+	 */
 	private static GridPane GridDataEmployee(String string) {
 		GridPane grid = new GridPane();
 		grid.setHgap(20);
@@ -130,6 +143,13 @@ public class AdminPage {
 	    
 		return grid;
 	}
+	
+	/**
+	 * The method GridDataOrders
+	 * show the orders researched
+	 * @param string orders to search	
+	 * @return updated table
+	 */
 	private static GridPane GridDataOrders(String string) {
 		GridPane grid = new GridPane();
 		grid.setHgap(20);
@@ -158,6 +178,13 @@ public class AdminPage {
 	    
 		return grid;
 	}
+	
+	/**
+	 * The method GridDataWines
+	 * show all information about the wines researched
+	 * @param filter the name of wines to research
+	 * @return updated table
+	 */
     private static GridPane GridDataWines(String filter) {
 		GridPane grid = new GridPane();
 		grid.setHgap(20);
@@ -194,6 +221,11 @@ public class AdminPage {
 		return grid;
 	}
     
+    /**
+     * The method GridDataAdmin
+     * allows the admin to see a chart of the wines left in the storage
+     * @return the chart of wines
+     */
 	public static GridPane GridDataAdmin() {
 		GridPane grid = new GridPane();
 		grid.setHgap(10);
@@ -207,6 +239,11 @@ public class AdminPage {
 		return grid;
 	}
 	
+	/**
+	 * The method VBoxDataAdmin
+	 * allows the Admin to Add an employee or
+	 * search information about Clients,Employees,Wines and Orders
+	 */
 	public static VBox VBoxDataAdmin() {
 		VBox vbox = new VBox();
 		vbox.setPadding(new Insets(10));
@@ -230,8 +267,11 @@ public class AdminPage {
 		return vbox;
 	}
 
+	/**
+	 * The method InfoOrders
+	 * allows to show information of orders
+	 */
 	private static void InfoOrders() {
-		
 		Stage stageInfOrd = new Stage();
 		BorderPane borderInfOrd = new BorderPane();
 		borderInfOrd.setStyle("-fx-background-color:  #ABCDEF;");
@@ -244,9 +284,12 @@ public class AdminPage {
 		stageInfOrd.setScene(sceneInfOrd);
 		stageInfOrd.show();
 	}
-
+	
+	/**
+	 * The method InfoWines
+	 * allows to show information of winess
+	 */
 	private static void InfoWines() {
-		
 		Stage stageInfWin = new Stage();
 		BorderPane borderInfWin = new BorderPane();
 		borderInfWin.setStyle("-fx-background-color:  #ABCDEF;");
@@ -260,8 +303,11 @@ public class AdminPage {
 		stageInfWin.show();
 	}
 
+	/**
+	 * The method InfoEmployees
+	 * allows to show information of employees
+	 */
 	private static void InfoEmployees() {
-		
 		Stage stageInfEmp = new Stage();
 		BorderPane borderInfEmp = new BorderPane();
 		borderInfEmp.setStyle("-fx-background-color:  #ABCDEF;");
@@ -275,6 +321,10 @@ public class AdminPage {
 		
 	}
 
+	/**
+	 * The method InfoClients
+	 * allows to show information of clients
+	 */
 	private static void InfoClients() {
 		Stage stageInfCli = new Stage();
 		BorderPane borderInfCli = new BorderPane();
@@ -289,6 +339,10 @@ public class AdminPage {
 		
 	}
 
+	/**
+	 * The method AddEmployee
+	 * allows to add an employee
+	 */
 	private static void AddEmployee() {
 		Stage stageAddEmp = new Stage();
 		stageAddEmp.setTitle("Set Account Employee");

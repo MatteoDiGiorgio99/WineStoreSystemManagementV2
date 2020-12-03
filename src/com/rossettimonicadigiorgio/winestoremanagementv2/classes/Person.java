@@ -20,6 +20,7 @@ public abstract class Person implements Serializable {
 	
 	 /**
 	  * Class constructor
+	  * @param IDPerson the id of the person
 	  * @param name of the person
 	  * @param surname of the person
 	  * @param email of the person
@@ -58,6 +59,10 @@ public abstract class Person implements Serializable {
 	  */
 	 public String getEmail() { return this.email; }
 	 
+	 /**
+	  * Set a new email
+	  * @param email the new email
+	  */
 	 protected void setEmail(String email) { this.email = email;}
 	 
 	 /**
@@ -66,6 +71,9 @@ public abstract class Person implements Serializable {
 	  */
 	 public String getPassword() { return this.password; }
 	 
-	 
+	 /**
+	  * Set a new password
+	  * @param password the new password
+	  */
 	 protected void setPassword(String password) { this.password = password;}
 }

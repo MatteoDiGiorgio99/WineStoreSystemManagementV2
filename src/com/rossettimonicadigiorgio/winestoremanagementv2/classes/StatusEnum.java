@@ -26,6 +26,10 @@ public enum StatusEnum implements Serializable {
 		this.id = id;
 	}
 	
+	/**
+	 * Fetch the Id
+	 * @return id
+	 */
 	public int GetID() {
 		return this.id;
 	}

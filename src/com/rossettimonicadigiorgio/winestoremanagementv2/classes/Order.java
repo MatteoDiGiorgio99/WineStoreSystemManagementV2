@@ -20,6 +20,7 @@ public class Order implements Serializable {
 	
 	/**
 	 * Class constructor
+	 * @param IDOrder id of the order
 	 * @param status that made the order
 	 * @param user that made the order
 	 * @param wines that is been ordered
@@ -62,6 +63,10 @@ public class Order implements Serializable {
 	 */
 	public List<Wine> getWines() { return this.Wines; }
 	
+	/**
+	 * The method ToString
+	 * convert the class to a string 
+	 */
     @Override
     public String toString() { 
         return String.format("Order %d | Status: %s | %d Products", this.IDOrder, this.Status, this.Wines.size()); 
