@@ -287,7 +287,7 @@ public class AdminPage {
 	
 	/**
 	 * The method InfoWines
-	 * allows to show information of winess
+	 * allows to show information of wines
 	 */
 	private static void InfoWines() {
 		Stage stageInfWin = new Stage();

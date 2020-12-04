@@ -27,7 +27,7 @@ import javafx.stage.Stage;
 /**
  * The {@code EmployeePage} is a class that defines:
  * The graphic of the EmployeePage
- * @author 297398
+ * @author 297402
  *
  */
 public class EmployeePage {

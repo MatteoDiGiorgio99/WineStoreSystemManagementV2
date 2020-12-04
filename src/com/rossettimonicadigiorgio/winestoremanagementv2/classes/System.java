@@ -250,7 +250,7 @@ public class System {
 	/**
 	 * The method FindWine
 	 * @param wine to search
-	 * @return the wine if has bee found
+	 * @return the wine if has been found
 	 */
 	private Wine FindWine(Wine wine) { 
 		for (Wine globalwine : this.wines) {

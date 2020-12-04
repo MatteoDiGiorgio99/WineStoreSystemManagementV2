@@ -42,7 +42,7 @@ import javafx.stage.Stage;
  * The {@code UserPage} is a class that defines:
  * User page
  * 
- * @author 297398
+ * @author 297402
  *
  */
 public class UserPage {

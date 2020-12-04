@@ -10,7 +10,22 @@ import com.rossettimonicadigiorgio.winestoremanagementv2.backend.MySQLConnection
 
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Administrator;
 
+/**
+ * The {@code AdministratorController} is a class that defines:
+ * a controller for the admin
+ * 
+ * @author 296666
+ *
+ */
 public class AdministratorController {
+	
+	/**
+	 * The method login
+	 * allows the admin to access to the database using their credentials
+	 * @param username of the admin
+	 * @param password of the admin
+	 * @return an admin
+	 */
 	public static Administrator login(String username, String password) {
 		try {
 			Statement stmt =  MySQLConnection.establishConnection().createStatement();

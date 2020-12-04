@@ -17,7 +17,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-
+/**
+ * The {@code MainClient} is a class that defines:
+ * the start page that appears as soon as you run the program
+ * 
+ * @author 297398
+ *
+ */
 public class MainClient extends Application {
 	static Person user;
 	static ArrayList<Wine> listWineCart = new ArrayList<Wine>();

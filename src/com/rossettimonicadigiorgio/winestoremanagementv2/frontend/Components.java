@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 /**
  * The {@code Component} is a class that defines:
  * The component of user interface
- * @author 297402
+ * @author 297398
  *
  */
 public class Components {

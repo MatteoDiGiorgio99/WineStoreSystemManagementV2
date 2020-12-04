@@ -12,7 +12,19 @@ import com.rossettimonicadigiorgio.winestoremanagementv2.classes.StatusEnum;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.User;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Wine;
 
+/**
+ * The {@code OrderController} is a class that defines:
+ * controller for the order
+ * 
+ * @author 296666
+ *
+ */
 public class OrderController {
+	
+	/**
+	 * The method getAllOrders
+	 * @return the selected orders
+	 */
 	public static ArrayList<Order> getAllOrders() {
 		try {
 			Statement stmt =  MySQLConnection.establishConnection().createStatement();
@@ -61,6 +73,10 @@ public class OrderController {
 		}
 	}
 	
+	/**
+	 * The method getOrdersToShip
+	 * @return the orders to ship
+	 */
 	public static ArrayList<Order> getOrdersToShip() {
 		try {
 			Statement stmt =  MySQLConnection.establishConnection().createStatement();
@@ -109,6 +125,12 @@ public class OrderController {
 		}
 	}
 	
+	/**
+	 * The method getLastOrderForUser
+	 * allows to show at the user their last order
+	 * @param idUser the id of the user
+	 * @return last orders
+	 */
 	public static Order getLastOrderForUser(int idUser) {
 		try {
 			Statement stmt =  MySQLConnection.establishConnection().createStatement();
@@ -152,6 +174,12 @@ public class OrderController {
 		}
 	}
 	
+	/**
+	 * The method shipOrder
+	 * allows to update the status of the order
+	 * @param idOrder the id of the order
+	 * @return the updated status of the order
+	 */
 	public static boolean shipOrder(int idOrder) {
 		try {
 			Statement stmt =  MySQLConnection.establishConnection().createStatement();
@@ -167,6 +195,12 @@ public class OrderController {
 		}
 	}
 	
+	/**
+	 * The method insertOrder
+	 * allows to insert an order
+	 * @param orderToInsert the order to insert
+	 * @return the inserted order
+	 */
 	public static Order insertOrder(Order orderToInsert) {
 		try {
 			String insertOrderQuery = "INSERT INTO orders (Status, User) VALUES (?, ?)";
@@ -207,6 +241,12 @@ public class OrderController {
 		}
 	}
 	
+	/**
+	 * The method addOrderWines
+	 * allows to add the wines sell to the order list
+	 * @param idOrder the id of the order
+	 * @param wine that we want to add
+	 */
 	private static void addOrderWines(int idOrder, Wine wine) {
 		try {
 			String insertOrderQuery = "INSERT INTO orderwines (Wine, OrderNumber, BottlesNumber) VALUES (?, ?, ?)";

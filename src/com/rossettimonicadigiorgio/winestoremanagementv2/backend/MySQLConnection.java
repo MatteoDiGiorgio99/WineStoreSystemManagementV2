@@ -4,6 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * The {@code MySQLConnection} is a class that defines:
+ * sensitive data of the database
+ * 
+ * @author 296666
+ *
+ */
 public class MySQLConnection {
 	private static final String DBURL = "jdbc:mysql://localhost:3306/winestoremanagement?";
 	private static final String DBARGS = "createDatabaseIfNotExist=true&serverTimezone=UTC";

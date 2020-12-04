@@ -2,6 +2,7 @@ package com.rossettimonicadigiorgio.winestoremanagementv2.classes;
 
 import java.io.Serializable;
 import java.util.*;
+
 /**
  * The {@code Wine} Class defines a behavior that:
  * Manages The Creations of the wines to be sold
@@ -67,6 +68,10 @@ public class Wine implements Serializable {
 		return new Wine(this.IDWine, this.Name, this.Producer, this.Year, this.Price, this.Notes, this.BottlesNumber, this.Vines);
 	}
 	
+	/**
+	 * The method ToString
+	 * convert the class to a string
+	 */
     @Override
     public String toString() { 
         return String.format(this.Name + ": $" + this.Price + " | " + this.BottlesNumber + " bottles selected"); 

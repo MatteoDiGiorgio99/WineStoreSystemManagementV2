@@ -9,7 +9,22 @@ import java.util.ArrayList;
 import com.rossettimonicadigiorgio.winestoremanagementv2.backend.MySQLConnection;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.User;
 
+/**
+ * The {@code UserController} is a class that defines:
+ * a controller for the user
+ * 
+ * @author 296666
+ *
+ */
 public class UserController {
+	
+	/**
+	 * The method login 
+	 * allows the user to login
+	 * @param username of the user
+	 * @param password of the user
+	 * @return logged user
+	 */
 	public static User login(String username, String password) {
 		try {
 			Statement stmt =  MySQLConnection.establishConnection().createStatement();
@@ -35,6 +50,12 @@ public class UserController {
 		}
 	}
 	
+	/**
+	 * The method register 
+	 * allows to register a new user
+	 * @param user the data of new user
+	 * @return a new user
+	 */
 	public static User register(User user) {
 		try {
 			String query = "INSERT INTO users (Name, Surname, Email, Password) VALUES (?, ?, ?, ?)";
@@ -65,6 +86,10 @@ public class UserController {
 		}
 	}
 	
+	/**
+	 * Fetch users 
+	 * @return list of users
+	 */
 	public static ArrayList<User> getUsers() {
 		try {
 			Statement stmt =  MySQLConnection.establishConnection().createStatement();
@@ -94,6 +119,12 @@ public class UserController {
 		}
 	}
 	
+	/**
+	 * The method getUserByID
+	 * allows to get all data of a selected userid
+	 * @param idUser id of the user
+	 * @return the user searched
+	 */
 	public static User getUserByID(int idUser) {
 		try {
 			Statement stmt =  MySQLConnection.establishConnection().createStatement();

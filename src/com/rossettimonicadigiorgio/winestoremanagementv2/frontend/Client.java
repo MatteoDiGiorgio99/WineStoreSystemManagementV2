@@ -11,13 +11,13 @@ import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Response;
  * The {@code Client} is a class that defines:
  * a client capable of sending a request to a specific server.
  * 
- * @author 296666
+ * @author 297398
  *
  */
 public class Client {
+	
 	private static final int SPORT = 4444;
 	private static final String SHOST = "localhost";
-	
 	
 	/**
 	 * This method sends a request to a server and waits for its response.

@@ -9,7 +9,22 @@ import java.util.ArrayList;
 import com.rossettimonicadigiorgio.winestoremanagementv2.backend.MySQLConnection;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Employee;
 
+/**
+ * The {@code EmployeeController} is a class that defines:
+ * a controller for the employee
+ * 
+ * @author 296666
+ *
+ */
 public class EmployeeController {
+	
+	/**
+	 * The method login
+	 * allows an employee to login
+	 * @param username of the employee
+	 * @param password of the employee
+	 * @return the logged employee
+	 */
 	public static Employee login(String username, String password) {
 		try {
 			Statement stmt =  MySQLConnection.establishConnection().createStatement();
@@ -35,6 +50,12 @@ public class EmployeeController {
 		}
 	}
 	
+	/**
+	 * The method register
+	 * allows to register as a employee
+	 * @param employee data of the new employee
+	 * @return a new employee
+	 */
 	public static boolean register(Employee employee) {
 		try {
 			String query = "INSERT INTO employees (Name, Surname, Email, Password) VALUES (?, ?, ?, ?)";
@@ -55,6 +76,10 @@ public class EmployeeController {
 		}
 	}
 	
+	/**
+	 * Fetch data of employees
+	 * @return employees
+	 */
 	public static ArrayList<Employee> getEmployees() {
 		try {
 			Statement stmt =  MySQLConnection.establishConnection().createStatement();

@@ -8,7 +8,20 @@ import java.util.ArrayList;
 import com.rossettimonicadigiorgio.winestoremanagementv2.backend.MySQLConnection;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Wine;
 
+/**
+ * The {@code WineController} is a class that defines:
+ * a controller for the wines
+ * 
+ * @author 296666
+ *
+ */
 public class WineController {
+	
+	/**
+	 * The method getAllWines
+	 * allows to show a list of all wines
+	 * @return return the list of all wines
+	 */
 	public static ArrayList<Wine> getAllWines() {
 		try {
 			Statement stmt =  MySQLConnection.establishConnection().createStatement();
@@ -53,6 +66,12 @@ public class WineController {
 		}
 	}
 	
+	/**
+	 * The method getFilteredWines
+	 * allows to search a specific wine
+	 * @param filter research parameter
+	 * @return result of the research
+	 */
 	public static ArrayList<Wine> getFilteredWines(String filter) {
 		try {
 			Statement stmt =  MySQLConnection.establishConnection().createStatement();
@@ -97,6 +116,12 @@ public class WineController {
 		}
 	}
 	
+	/**
+	 * The method getWineByID
+	 * allows to search a wine by ID
+	 * @param idWine the id of the wine we are searching for
+	 * @return the selected wine
+	 */
 	public static Wine getWineByID(int idWine) {
 		try {
 			Statement stmt =  MySQLConnection.establishConnection().createStatement();
@@ -137,6 +162,12 @@ public class WineController {
 		}
 	}
 	
+	/**
+	 * The method updateWine
+	 * allow to update the number of bottle that are been sold
+	 * @param wine to update
+	 * @return updated number of bottles
+	 */
 	public static boolean updateWine(Wine wine) {
 		try {
 			String updateQuery = "UPDATE wines SET BottlesNumber = " + wine.getBottlesNumber() + " WHERE IDWine = " + wine.getIDWine();
@@ -152,6 +183,12 @@ public class WineController {
 		}
 	}
 	
+	/**
+	 * The method restockWine
+	 * allows to update the number of bottle of a specific wine
+	 * @param wine to update
+	 * @return updated number of bottles
+	 */
 	public static boolean restockWine(Wine wine) {
 		try {
 			String updateQuery = "UPDATE wines SET BottlesNumber = BottlesNumber + " + wine.getBottlesNumber() + " WHERE IDWine = " + wine.getIDWine();

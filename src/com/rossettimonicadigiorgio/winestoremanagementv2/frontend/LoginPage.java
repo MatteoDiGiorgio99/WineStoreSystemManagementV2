@@ -26,7 +26,7 @@ import javafx.stage.Stage;
 /**
  * The {@code LoginPage} is a class that defines:
  * The graphic of the LoginPage
- * @author 297398
+ * @author 297402
  *
  */
 public class LoginPage {

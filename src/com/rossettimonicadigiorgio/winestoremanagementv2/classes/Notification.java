@@ -28,6 +28,10 @@ public class Notification implements Serializable {
 		this.wine = wine;
 	}
 	
+	/**
+	 * The method ToString
+	 * convert the class to a strings
+	 */
     @Override
     public String toString() {
     	if(!this.isNotified)

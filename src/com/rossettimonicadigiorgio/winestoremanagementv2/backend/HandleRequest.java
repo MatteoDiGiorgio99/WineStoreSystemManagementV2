@@ -14,7 +14,21 @@ import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Response;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.User;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Wine;
 
+/**
+ * 
+ * The {@code HandleRequest} is a class that defines:
+ * The request from the client
+ * 
+ * @author 296666
+ */
 public class HandleRequest {
+	
+	/**
+	 * The method run
+	 * handle the request of the button register and login
+	 * @param rq the request
+	 * @return a response
+	 */
 	static Response run (Request rq) {
 		Response rs = null;
 			

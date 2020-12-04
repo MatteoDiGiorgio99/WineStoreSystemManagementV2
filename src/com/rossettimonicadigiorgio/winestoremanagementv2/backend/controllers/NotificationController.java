@@ -10,8 +10,21 @@ import com.rossettimonicadigiorgio.winestoremanagementv2.backend.MySQLConnection
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Notification;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.User;
 import com.rossettimonicadigiorgio.winestoremanagementv2.classes.Wine;
-
+/**
+ * The {@code NotificationController} is a class that defines:
+ * a controller for the notification
+ * 
+ * @author 296666
+ *
+ */
 public class NotificationController {
+	
+	/**
+	 * The method getNotificationByUser
+	 * allows to notify a user when the wine he selected return available
+	 * @param idUser user that want to be notified
+	 * @return result of the query
+	 */
 	public static ArrayList<Notification> getNotificationByUser(int idUser) {
 		try {
 			Statement stmt =  MySQLConnection.establishConnection().createStatement();
@@ -43,6 +56,12 @@ public class NotificationController {
 		}
 	}
 	
+	/**
+	 * The method insertNotification
+	 * allow you to be notified about the product you have selected as soon as it becomes available
+	 * @param notification the notification to insert
+	 * @return the inserted notification
+	 */
 	public static Notification insertNotification(Notification notification) {
 		try {
 			String query = "INSERT INTO notifications (User, Wine, IsNotified) VALUES (?, ?, ?)";
@@ -72,6 +91,11 @@ public class NotificationController {
 		}
 	}
 	
+	/**
+	 * The method updateNotificationByWine
+	 * @param idWine to update the status of notification
+	 * @return updated notification
+	 */
 	public static boolean updateNotificationByWine(int idWine) {
 		try {
 			Statement stmt =  MySQLConnection.establishConnection().createStatement();
