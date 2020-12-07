@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.rossettimonicadigiorgio.winestoremanagementv2.backend"},{"l":"com.rossettimonicadigiorgio.winestoremanagementv2.backend.controllers"},{"l":"com.rossettimonicadigiorgio.winestoremanagementv2.classes"},{"l":"com.rossettimonicadigiorgio.winestoremanagementv2.frontend"}]
