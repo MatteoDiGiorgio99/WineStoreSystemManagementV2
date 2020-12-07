@@ -52,7 +52,7 @@ public class EmployeeController {
 	
 	/**
 	 * The method register
-	 * allows to register as a employee
+	 * allows to register a employee
 	 * @param employee data of the new employee
 	 * @return a new employee
 	 */

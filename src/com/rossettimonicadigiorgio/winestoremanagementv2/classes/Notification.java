@@ -18,8 +18,11 @@ public class Notification implements Serializable {
 	
 	/**
 	 * Class constructor
+	 * 
+	 * @param idNotification
 	 * @param user the user
 	 * @param wine that we want to be notified
+	 * @param isNotified if the notification has already been notified
 	 */
 	public Notification(int idNotification, User user, Wine wine, boolean isNotified) {
 		this.idNotification = idNotification;
@@ -30,7 +33,8 @@ public class Notification implements Serializable {
 	
 	/**
 	 * The method ToString
-	 * convert the class to a strings
+	 * 
+	 * convert the class to a string
 	 */
     @Override
     public String toString() {
@@ -42,7 +46,8 @@ public class Notification implements Serializable {
 	
 	/**
 	 * Fetch the id of the notification
-	 * @return user
+	 * 
+	 * @return the corresponding id
 	 */
 	public int getIDNotification() {
 		return this.idNotification;

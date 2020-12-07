@@ -36,8 +36,8 @@ public class Request implements Serializable {
 	}
 	
 	/**
-	 * Fetch the params
-	 * @return params
+	 * Fetch the parameters
+	 * @return parameters of the request
 	 */
 	public List<Object> getParams() {
 		return this.params;

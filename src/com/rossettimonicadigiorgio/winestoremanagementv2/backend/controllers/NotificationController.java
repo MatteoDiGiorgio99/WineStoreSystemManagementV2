@@ -21,7 +21,8 @@ public class NotificationController {
 	
 	/**
 	 * The method getNotificationByUser
-	 * allows to notify a user when the wine he selected return available
+	 * allows to notify a user when the wine he selected returns available
+	 * 
 	 * @param idUser user that want to be notified
 	 * @return result of the query
 	 */
@@ -59,6 +60,7 @@ public class NotificationController {
 	/**
 	 * The method insertNotification
 	 * allow you to be notified about the product you have selected as soon as it becomes available
+	 * 
 	 * @param notification the notification to insert
 	 * @return the inserted notification
 	 */
@@ -93,8 +95,9 @@ public class NotificationController {
 	
 	/**
 	 * The method updateNotificationByWine
+	 * 
 	 * @param idWine to update the status of notification
-	 * @return updated notification
+	 * @return if the notification has been updated
 	 */
 	public static boolean updateNotificationByWine(int idWine) {
 		try {

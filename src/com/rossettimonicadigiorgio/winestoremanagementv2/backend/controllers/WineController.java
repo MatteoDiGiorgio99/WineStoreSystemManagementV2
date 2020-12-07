@@ -20,6 +20,7 @@ public class WineController {
 	/**
 	 * The method getAllWines
 	 * allows to show a list of all wines
+	 * 
 	 * @return return the list of all wines
 	 */
 	public static ArrayList<Wine> getAllWines() {
@@ -69,6 +70,7 @@ public class WineController {
 	/**
 	 * The method getFilteredWines
 	 * allows to search a specific wine
+	 * 
 	 * @param filter research parameter
 	 * @return result of the research
 	 */
@@ -119,6 +121,7 @@ public class WineController {
 	/**
 	 * The method getWineByID
 	 * allows to search a wine by ID
+	 * 
 	 * @param idWine the id of the wine we are searching for
 	 * @return the selected wine
 	 */
@@ -165,8 +168,9 @@ public class WineController {
 	/**
 	 * The method updateWine
 	 * allow to update the number of bottle that are been sold
+	 * 
 	 * @param wine to update
-	 * @return updated number of bottles
+	 * @return if the wine has been updated
 	 */
 	public static boolean updateWine(Wine wine) {
 		try {
@@ -186,8 +190,9 @@ public class WineController {
 	/**
 	 * The method restockWine
 	 * allows to update the number of bottle of a specific wine
-	 * @param wine to update
-	 * @return updated number of bottles
+	 * 
+	 * @param wine to restock
+	 * @return if the wine has been updated
 	 */
 	public static boolean restockWine(Wine wine) {
 		try {

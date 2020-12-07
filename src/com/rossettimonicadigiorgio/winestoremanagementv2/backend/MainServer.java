@@ -3,8 +3,11 @@ package com.rossettimonicadigiorgio.winestoremanagementv2.backend;
 import java.io.IOException;
 
 /**
+ * The class {@code MainServer} is a class that defines the following behaviours:
+ * 
+ * Starts the server
+ * 
  * @author 296666
- *
  */
 public class MainServer {
 

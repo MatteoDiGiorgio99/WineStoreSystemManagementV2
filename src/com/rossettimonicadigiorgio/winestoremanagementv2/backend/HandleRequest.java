@@ -25,7 +25,10 @@ public class HandleRequest {
 	
 	/**
 	 * The method run
-	 * handle the request of the button register and login
+	 * handles every connection for that servers.
+	 * It will be processed by the sql server
+	 * and its response will be returned to the client
+	 * 
 	 * @param rq the request
 	 * @return a response
 	 */

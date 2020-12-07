@@ -6,7 +6,8 @@ import java.sql.SQLException;
 
 /**
  * The {@code MySQLConnection} is a class that defines:
- * sensitive data of the database
+ * sensitive data of the database and
+ * the connection to the database
  * 
  * @author 296666
  *
