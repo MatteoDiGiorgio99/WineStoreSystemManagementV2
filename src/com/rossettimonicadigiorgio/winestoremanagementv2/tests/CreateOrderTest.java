@@ -80,7 +80,7 @@ public class CreateOrderTest {
 	public void testReserchWines(String query) {
 		CreateOrderTest.params.add(query);
 		
-		CreateOrderTest.wines = (ArrayList<Wine>) new Client().run(new Request("filterWines", params)).getValue();
+		CreateOrderTest.wines.addAll((ArrayList<Wine>) new Client().run(new Request("filterWines", params)).getValue());
 		
 		assertTrue(CreateOrderTest.wines.size() >= 0);
 	}
